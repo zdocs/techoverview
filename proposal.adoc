@@ -1,0 +1,35 @@
+include::settings.adoc[]
+
+:leveloffset: +1
+
+<<<
+
+include::overview.adoc[]
+
+<<<
+
+include::tech.adoc[]
+
+<<<
+
+include::arch.adoc[]
+
+<<<
+
+include::ha.adoc[]
+
+<<<
+
+include::approach.adoc[]
+
+<<<
+
+include::ports.adoc[]
+
+<<<
+
+include::legal.adoc[]
+
+<<<
+
+:leveloffset: -1

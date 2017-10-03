@@ -1,0 +1,75 @@
+[[architecture]]
+= Zimbra Architecture
+This diagram represents the Zimbra architecture.
+
+image::images/ports_arch.png[Client Server Flow Architecture]
+
+The mailbox server is running Jetty, the Java Virtual Machine, and this is the service node for the mailboxd architecture. On the backend, it is handling everything from storing the messages on disk to all of the other functions shown.
+
+Zimbra was built around SOAP requests: the browser clients issue a SOAP request to the mailboxd process to retrieve information and that information is delivered back to the browser client.
+
+== Message and File Store
+Zimbra stores messages on disk. Messages are stored in the *RFC 822* format. If you have access as a system administrator, you can go to /opt/zimbra/store directory and drill down to look at the actual messages stored in MIME format on disk. A benefit of this storage architecture is that LINUX does single-instance storage: if I send a message to 3 different people, and we all share the same mailbox server, then there is only one instance of that mail item in the store. LINUX maintains multiple points to that mail item.
+
+The data store is a MySQL database where internal mailbox IDs are linked with user accounts. The data store maps the mailbox IDs to users’ OpenLDAP accounts. This database contains each user’s set of tag definitions, folders, calendar schedules and contacts, as well as the status of each mail message - read, unread, tags associated to message, and folder the message resides in. Index and search technology is provided through Lucene and index files are maintained for each individual mailbox.
+
+The other enhancement in the Zimbra 8 series is that the storage system can be a different type of file system, such as a global file system like Scality or EMC. Many Zimbra customers implement Zimbra over object store, so the message blobs are stored on a global array across multiple spindles and multiple pieces of hardware. It provides more redundancy and availability for the message store.
+
+image::images/store_link.png[Message Store Directory Layout, 500]
+
+The Zimbra message (or blob) store is built on the underlying Unix/Linux file system. The mapping is one file per message, we actually write the RFC822 MIME message representation directly to a file. This has a number of benefits:
+
+* Once written, messages are immutable in Zimbra, and file systems are very efficient at storing and retrieving immutable unstructured/semi-structured blocks of data.
+* Garbage collection is provided natively by the operating system, which offers both greater efficiency and lower administrative overhead.
+* Independent utilities, tools, and scripts can easily recognize and process the Zimbra message representation on disk.
+* Native operating system capabilities such as indexing/search (e.g., Mac Spotlight), compression, and security.
+* Multi-level caching. Zimbra caches data itself, but Zimbra also benefits from the underlying operating system caching. Since enterprise messaging systems are generally gated on read and write performance, effective caching is one of the critical foundations of a scalable messaging implementation.
+
+For each instance of the Zimbra mailbox server (one instance per machine), we store one copy of each message including all its attachments, even if that message is destined for multiple mailboxes. This obviously can lead to substantial savings in disk if large attachments are often sent to multiple recipients on a server (some messaging servers only provide single copy per mailbox or single copy per storage group, which can lead to significant redundancy in more expensive managed storage with no improvement in availability/fault tolerance). For operating systems that support them, we utilize hard links to the single copy to efficiently ensure that a file is garbage collected after all users have deleted it from their mailbox metadata.
+
+== Metadata SQL Store
+While messages themselves are immutable, the meta-data associated with a message goes through frequent state changes as it is used. Message meta-data includes such items as
+
+* What folder is the message in?
+* What tags does the message have?
+* Is the message read or unread?
+* What conversation is the message part of?
+
+We are storing the header information of every message. When you go into the web client and open your mailbox, you see the header information (who the message is from, when it was received, etc.). That is all meta data stored in the MariaDB database. When you click on the message to display it, Zimbra reads the message from the storage system.
+
+Zimbra includes this MariaDB database for managing mailbox meta-data, and it is shipped within each Zimbra distribution. We choose to use a relational database for Zimbra meta-data because:
+
+* We sought to leverage the hardening and performance investment of smart engineers before us. For efficient searching and reliably updating highly structured meta-data, it is hard to beat relational databases.
+* Caching - Unlike immutable messages, Zimbra’s meta-data is both frequently read and written. Relational databases provide very efficient caching for both reads and writes. Update caching efficiency comes out of combining multiple updates, even those spanning transactions, into a single disk write (this optimization, of course, leverages the database’s sequentially-written transaction log to ensure that no changes are lost in the event of an outage).
+* The SQL interface provides the Zimbra Community with investment protection in that the ZCS mailbox server could be very easily ported to other relational databases from the MySQL implementation that is currently included in ZCS.
+* Database Reliability: Every transaction that occurs in Zimbra is stored in the Zimbra redo log. That includes everything from receiving a message in your inbox, reading that message, moving that message to another folder, deleting the message, adding a calendar appointment, adding a new address book, etc. All of these things are transactions, and all transactions are stored in the Zimbra redo log, which is handled by the mailboxd process.
+
+== Search
+When a message comes into Zimbra, that message is indexed with the Lucene indexing process. This provides the basis for the very fast search in Zimbra, including the ability to search across multiple criteria.
+
+Search is fundamental to the Zimbra. Zimbra users do need to rely on complicated folder hierarchies to organize their emails because Zimbra users can search almost anything instantaneously across any folders. This enables usability advantages as users can archive emails into a single folder. All the meta-data associated with a message (folder, read/unread, tags, etc.) is available as search criteria, as are indexes into the content of the messages and the content of any attachments to the messages. Zimbra provides a simple, yet rich grammar for specifying searches, and then offers a graphical search builder for constructing advanced searches without having to learn that grammar.
+
+Zimbra search is conducted on the server side. The advantages of server-side search are access to full mailboxes (including
+archived content), reliance on faster disk/CPU for increased performance (even factoring in the network latency), and the elimination of a substantial amount of redundant computation associated with indexing attachments sent to multiple recipients.
+
+Zimbra leverages Apache Lucene to manage the index that enables fast searching, and Zimbra uses third-party software from Verity to extract text from attachments for indexing within Lucene.
+
+== Lucene Index
+Lucene is a high-performance, full-text search engine from Apache.  Lucene works by generating a full “segment” index for all words/tokens in a particular message, and optionally, its attachments. This segment is then merged into the receiving users’ existing index (one index per user). The index itself is represented in flat files. Search simply traverses these optimized file structures, often in parallel.
+
+Search is very fast—users perceive it to be nearly instantaneous. The pre-processing required to construct an index, on the other hand, grows linearly with the size of the text. Attachments tend to be the overriding factor in this overhead. Attachment indexing is a function of user’s class of service, and so can be turned on or off based on server scaling requirements. Message text indexing is more essential to the user experience (as well as significantly lower-overhead due to the smaller datasets)—it is a big part of the reason why many Zimbra users become comfortable with dropping their complex, time-intensive folder hierarchies in favor of a single “Stash” folder, because powerful search frees them from the worry that they will not be able to find what they are looking for.
+
+We have found this Lucene index to typically be about 20% of the size of the text being indexed. Simply by compressing messages and their attachments prior to storage, we can make up the space required to store the Lucene index. As a user’s index grows larger, the savings increase, since there is greater reuse of tokens. Garbage collection is done on the indices only after expunging messages (emptying the trash), so that trashed messages can still be found (many Zimbra users choose to use their trash as a secondary archive folder, since no message data need be expunged from the trash until the user’s quota is reached). Should a more catastrophic failure lead to an index corruption; there is also an administrative interface for regenerating Lucene indices (which are, of course, idempotent).
+
+== Other Services and Access Methods
+
+* *Attachment Index & View*: With the Zimbra Network Edition, and you have attachment indexing and view capabilities turned on, and that process is being provided by the mailboxd process. Convertd is the pricess wiht the attachment index and viewing capability. If I send you an email with a PowerPoint presentation, the Autonomy Keyview process adds the attachment to your search index, so you can perform an email search that also searches the attachment.
+* *Free/Busy Providers*: The last process that is being handled by the mailboxd process is the integration with free/busy providers. If you are migrating from MIcrosoft Exchange to the Zimbra platform, and you have some users on the legacy system and others on the new Zimbra system, and you want them to be able to update calendar information in both directions, that service would be provided by the free/busy provider within the mailboxd architecture.
+* *Lite Browser Clients*: It is possible to use Zimbra in HTML mode, where the information is displayed in HTML. The AJAX client, built on the AJAX framework, provides drag-and-drop functionality and other things that users are accustomed to in the browser.
+* *Desktop Clients*: We have the Zimbra Desktop. We also have Microsoft Outlook, which connects to the Zimbra environment over POP or IMAP. You can also install the Zimbra Connector for Outlook. This is part of the Network Edition of Zimbra. The Zimbra Connector for Outlook provides the integrated functionality of calendar, contacts, and tasks from within Outlook, which makes Outlook think that it is talking to an Exchange server. When Outlook communicates with an Exchange server, it is using the MAPI protocol. The MAPI protocol is a Microsoft API. Zimbra does not listen on that API, so we have to translate those requests from MAPI commands to SOAP commands over HTTPS. +
++
+We also have the ability for other clients like Thunderbird, the Apple mail client, or the Apple calendar to communicate with the Zimbra mailboxd process. We can do this over CardDAV or CalDAV or POP or IMAP.
+* Zimlets: Zimbra provides the ability to extend the web browser interface to integrate services from external web service providers. One Zimlet example is the Yahoo Finance Zimlet, which you can use to present a stock ticker in Zimbra that updates every 20 minutes. That information is coming from an external web service. From a security stand point, it is not recommended to present information in a client from across domains. The mailboxd process has something called the Zimlet web service proxy. When the browser running the Zimlet needs to update stock quotes, the request is made to the mailboxd process, the mailboxd process goes to the Internet and pulls that information from the external web service, and then delivers it back to the browser client. You can extend this to any external web service. If you are a manufacturing organization and you need to see order information displayed in email clients dynamically, you can write a Zimlet that goes out and pulls that information from your ordering management system and presents the information in the browser client without the user having to log into a separate system. +
++
+We also have the ability to create Zimlet JSP tags that communicate information back to the browser via the mailboxd interface.
+The other point to make is that when users of the desktop clients and browser clients send email, they connect to the mailbox server, they compose email in the client, and then they click send. The mailboxd process forwards that information to the postfix MTA service where antispam and antivirus is performed, and then it is forwarded to the endpoint.

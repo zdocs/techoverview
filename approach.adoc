@@ -1,0 +1,48 @@
+[approach]
+= Proposed Project Approach
+This section details how Zimbra professional services handle a project to ensure a smooth transition from the existing legacy platform to full Zimbra Collaboration Suite. This section serves as a guideline only and the approach needs to be modified and made suitable as per the customers requirements. Here are some of the processes and phases mentioned.
+
+== Assessment and Solution Design
+Site assessment and auditing means identifying the current infrastructure and business goals of the customer. This includes getting information about the current platform topology like hardware/storage/network capabilities, service SLA's, getting information on the current issues, etc.
+
+* Review the current environment and examine all the business and technical issues.
+** Get more information on the server, storage and network infrastructure
+* Formulate problem definitions and document the objectives.
+
+Solution design and service planning will include development of the Baseline Architecture, Low-Level Design (“LLD”), hardware Bill-of-Materials (“BOM”) and development of customizations and documentation for all of the above.
+
+* Develop an understanding of the customer’s existing architecture and technical challenges or issues.
+* Document the project requirements, phases and communication plans with the customer’s product and technical staff
+* Create a project definition including roles, dependencies, schedule estimates, communication plans, etc.
+* Create an integrated application architecture that is both flexible and scalable.
+* Present a solution design methodology that is agile.
+
+== Zimbra Deployment and Configuration
+This phase will involve the actual deployment of all the different Zimbra components like LDAP, MTA, Mailbox services based on solution design.
+
+*	Execute the project according to the documented and approved requirements and specifications.
+*	After installation, configure the platform as per the design
+* Integrate with existing gateway services, anti-spam, antivirus and other 3rd party dependencies etc.
+* Configuration of the dependencies and the Zimbra platform as per the requirements
+
+[NOTE]
+A good resource for deployment can be found here - https://wiki.zimbra.com/wiki/Performance_Tuning_Guidelines_for_Large_Deployments[Performance Tuning]
+
+== Testing
+Based on the requirements, a functional test case document needs to be ready for this phase. An UAT or functional testing ensures that there are no bugs/issues with the platform for regular day-to-day use and the customer has all their challenges addressed before the environment is made production ready. Testing may include the use of in-house or third party tools and the level of testing always depends on the customer requirements.
+
+*	Perform testing and quality assurance via functional, performance, and end-to-end testing.
+*	Manage or assist with any pilot/user acceptance testing.
+
+== Migration
+Migration is most critical part of any mail service.  Once all the required functional testing has been performed, its time to migrate the data from old legacy platform to Zimbra platform.
+
+Zimbra professional services can help with the design, planning, scripting, and/or testing of migration of all legacy data ( email, calendars, contacts, filters, etc) to the new Zimbra platform. Zimbra services can help design the best-suited migration approach for the customer based on inputs on the current setup and migration plans and also help develop the migration methods based on the migration plan, which may include migration via all-at-once/big-bang or incremental, split-domain methods. Zimbra services will also develop the necessary scripts to carry out migration and run the tools for a subset of users. Customer will run remaining subset when they gain enough knowledge and understanding.
+
+[NOTE]
+Zimbra Professional Services is not a bundled offering and is a separate paid service offering.
+
+== Audit and Operations
+The goal of this phase is to deliver an operational support model that will streamline production operations, provide proactive issue detection, and provide overall service excellence. Once the environment is live, there must be a process of regular auditing of the environment and its configurations to ensure that the system has been tuned for optimum performance. All fo the Zimbra statistical information is collected by the "stat" process and logged. This data can be analyzed further and decisions can be made on how to improve the system performance.
+
+Refer to this https://wiki.zimbra.com/wiki/ZCS_Operational_Best_Practices_-_Scope[ZCS Best Practices reference guide] for more information.

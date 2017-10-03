@@ -1,0 +1,15 @@
+:document-title: Technical Overview
+:product-name: Zimbra Collaboration
+:product: Zimbra
+:product-abbrev: ZCS
+= {product-name} {document-title}
+:toclevels: 2
+:icons: font
+:title-logo-image: images/zimbra.jpg
+:showlinks:
+:source-highlighter: coderay
+:toc: left
+:experimental:
+:product-version: 8.8
+:product-release-date: Sep, 2017
+:copyright-year: 2017

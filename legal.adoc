@@ -1,0 +1,12 @@
+[colophon]
+= License
+
+image:images/ccsa.png[CC BY-SA] Synacor, Inc., {copyright-year}
+
+(C) {copyright-year} by Synacor, Inc. {product-name} {document-title}
+
+Synacor, Inc., {copyright-year} +
+40 La Riviere Drive, Suite 300 +
+Buffalo, New York 14202
+
+https://www.synacor.com

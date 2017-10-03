@@ -1,0 +1,40 @@
+[appendix]
+[[zimbra_ports]]
+= {product-abbrev} Firewall Ports
+
+== Inside Firewall Ports
+
+[cols="15,75",options="header",grid="rows"]
+|======
+|Port |Function
+|22 |SSH for Remote Server logs/Management
+|25 |SMTP to MTA from internal AS/AV service
+|389 |MTA to LDAP Authentication
+|514 |(r)syslogd from ZCS servers to Logger (TCP/UDP)
+|7025 |LMTP from MTA's to Mailbox Servers
+|7071 |Zimbra Administration
+|7072 |Zimbra Route Lookups
+|7110 |Pop Proxy to Mailbox Servers
+|7143 |IMAP Proxy to Mailbox Servers
+|7993 |IMAP Proxy to Mailbox Servers (SSL)
+|7995 |POP Proxy to Mailbox Servers (SSL)
+|8080 |Proxy to Mailbox Server
+|8443 |Proxy to Mailbox Server if using SSL at Proxy
+|9071 |Zimbra Administration if using Admin Web Interface through Proxy
+|======
+
+== Outside Firewall Ports
+
+[cols="15,75",options="header",grid="rows"]
+|======
+|Port |Function
+|25 |SMTP to Internal AS/AV from external mail servers
+|80 |Connect to Zimbra Mail (if SSL offloaded by Load Balancer)
+|110 |POP to Proxy server (if SSL offloaded)
+|143 |IMAP to Proxy Server (if SSL offloaded)
+|465 |SMTPS to Internal
+|587 |Submission Email using TLS over SMTP
+|443 |Connect to Zimbra Mail over HTTPS
+|993 |IMAP SSL
+|995 |POP SSL
+|======

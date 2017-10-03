@@ -1,0 +1,27 @@
+[HA]
+= High Availability and Scalability
+
+== High Availability
+Single points of failure should be avoided wherever possible, at all levels: network, server, power supply, cabling, disk drives and software elements.  This should apply to ancillary systems (e.g. DNS and External Authentication Servers) as well as to the email servers themselves.
+
+=== LDAP Master
+The LDAP Master will have its database stored on the servers’ local disks. Redundancy is provided via the deployment of LDAP Replica servers. The replicas contain a full copy the master database and in the event of failure of the master server the replica can be promoted to master status and the service can continue. Adding replicas also facilitates the distribution of load on the LDAP services; balancing the load across the master and replicas is configured internally within the ZCS configuration. Zimbra also supports a Multi-Master mode where there can be more than one master LDAP server eliminating the need for replica servers.
+
+=== Mailstore
+Zimbra is designed to be deployed in a virtual environment. VMware, KVM are the popular VI environments supported. Zimbra works best with VMware vSphere and can leverage vSphere HA for the mailstore high-availability. Active-Active configuration is not supported today (part of the Always-On or 24x7 architecture for the next major Zimbra release in 2018). Zimbra can also work with traditional OS clustering (RedHat) but there is no application level failover supported and this works best for a hardware failure.
+
+=== MTA and Proxy
+Both the MTA and Proxy servers are stateless services and can run in an Active-Active mode behind a load-balancer.
+
+== Scalability
+Zimbra was designed from the ground up to scale to meet the needs of businesses with 100,000s of users and Service Providers with millions and even tens of millions of users. The Zimbra architecture inherits from distributed systems expertise that was gleaned building messaging systems that today host more than 100 million mailboxes world-wide and Java/Web systems that have thousands of production server CPUs within single large-scale deployments.
+
+All medium and large Zimbra deployments are horizontally partitioned across servers (and the attached storage) by end-user mailboxes. An end-user's mailbox includes his or her messages, calendar(s), address book(s), documents, and so on, which are all collocated for very efficient context switching and search across applications. So ZCS servers are inherently stateful - each serves as the primary home for a subset of the aggregate mailboxes. This requires that each ZCS server have the smarts to reroute a protocol request (via XML/SOAP/HTTP/S, IMAP/S, POP/S, RSS, iCal, etc.) to the appropriate primary server in the event that an in-bound load balancer makes the wrong decision.
+
+Automated replication and failover is also essential for large-scale deployments. For example, LDAP configuration data (which includes end-user mailbox home locations) can be fully replicated/partitioned across as many replica servers as are required to meet performance and availability requirements. LDAP replicas may be collocated with ZCS mailbox servers, MTAs, or “vertically partitioned” to dedicated servers.
+
+Mailbox data, on the other hand, can be transparently replicated within the underlying storage system (such as by using RAID or mirroring) for availability only. (It simply does not make sense to replicate mailboxes for scalability, given how frequently state data is updated, and the overhead of ensuring transactional consistency between multiple mailbox copies.) Clustering technology is used to automatically failover from the primary server to a preconfigured secondary (or tertiary) server, which then assumes the role of primary for that mailbox. (I/O fencing and associated technologies ensure that the former primary no longer has “write” access to the mailbox in order to avoid “split-brained syndrome”).
+
+ZCS Meta-data optimization & partitioning; Meta-data for a mailbox is generally all of the data required for navigating to the appropriate message or meeting. Zimbra meta-data includes ZCS's very efficient, Lucene based index into all the text contained in every message, meeting, contact, document, attachment, and so on. Zimbra meta-data also includes the structured meta-data that captures folders, tags, dates, read/unread status, etc. Zimbra uses an off-the-shelf SQL database for optimizing structured meta-data queries and updates.
+
+Meta-data is horizontally partitioned by user into the appropriate ZCS mailbox server, but the key additional insight is that this meta-data can also be partitioned from the target data (message body, meeting, document) to ensure very efficient search, UI painting, and so on. Separating the meta-data and target-data makes it far more cost-effective to keep the meta-data on fast disk, allowing sophisticated search and navigation to be nearly instantaneous even across multi-gigabyte mailboxes. Latency in access to the message body itself (which could, for example, reside in an HSM system) is not nearly as problematic to the user experience as latency or inefficiency in accessing the meta-data. Partitioned meta-data also allows potentially expensive operations such as compliance-related cross-mailbox discovery to be handled efficiently (via simply composing the appropriate horizontally partitioned search results).
