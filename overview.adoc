@@ -62,7 +62,7 @@ If some of your users prefer to work with enterprise email client like Microsoft
 === Archiving and Discovery
 Zimbra Archiving & Discovery is an optional feature that enables you archive messages that were delivered to or sent by Zimbra and to search across mailboxes. It’s specially designed for legal and audit purposes.
 
-== Zimbra Multi-Tenancy Value Addition (change title)
+== Zimbra Multi-Tenancy Value Addition
 Zimbra is a multi-tenant platform that can natively host hundreds or thousands of domains with an array of service offerings. Within the Zimbra platform, a set of common service capabilities is called a "Class of Service" (COS), and COS settings can be used to automate users provisioning requirements and establish service levels. For example, one COS can be targeted at “Basic” users with basic services (Webmail, POP, and SMTP), while another COS can provide “Normal” or “Mobile” services (Zimbra Connector for Outlook, over-the-air ActiveSync for mobile devices, sharing calendaring, Documents, Briefcase, etc.).
 
 Zimbra features and preferences can be set in the account profile for individual users or by the Class of Service (COS) for multiple users/groups when accounts are created. These settings can be modified at any time and are easily controlled via the Zimbra Admin interface. When deploying a Zimbra email infrastructure, multiple Class of Services can be defined and users will inherit the functions, features and branding associated with the COS to which they provisioned. When a user is provisioned into a specific COS they will automatic inherit the features and settings as defined in the COS, however it is possible to override COS attributes at a per user account level as part of the provisioning process.
