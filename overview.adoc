@@ -29,8 +29,10 @@ Zimbra 8.8 has a new refactored IMAP service to run separately from all other Zi
 === Zimbra Chat
 Now available in all versions of Zimbra! Peer-to-peer chat using XMPP. Know your company’s chat data is secure and private while your users enjoy searching chat history, emoticons, etc.
 
-=== Zimbra Talk
-Zimbra Talk brings secure, high-quality chat and videoconferencing right into the Zimbra Web Client. Users can chat and videoconference 1:1 and in groups, share files, share their screen and so much more.
+=== Zimbra Talk V2
+Zimbra Talk V2 brings secure, high-quality chat and videoconferencing right into the Zimbra Web Client. Users can chat and videoconference 1:1 and in groups, share files, share their screen and so much more.
+Zimbra Talk V2 is licensed on a per-user basis, and is available in Network Edition only.
+Zimbra Chat and Zimbra Talk V2 are not compatible and interoperable, meaning that the two products cannot freely coexist on any Zimbra NE infrastructure. The Zimbra Chat zimlet is uninstalled during the installation process of the Zimbra Talk Zimlet package. However, Zimbra Talk includes all «basic» IM features provided by Zimbra Chat which will be automatically enabled for all users who don’t have access to the «advanced» Zimbra Talk V2 features.
 
 === Zimbra Drive
 Zimbra Drive offers an integrated file sync and share functionality which needs to be built on an external ownCloud/Nextcloud platform. Zimbra Drive provides seamless synchronization and sharing of files between your users, wherever they are and on any device.
