@@ -27,9 +27,11 @@ Zimbra Talk V2 has two user interfaces: *Chat Panel and Zimbra Talk tab*.
 
 The *Chat Panel* is available to all users - basic and advanced - for text messaging. Advanced users will have the additional options of videoconferencing and file sharing in the panel.
 
+image::images/panel_chat.png[Chat Panel, 800]
+
 The *Zimbra Talk* tab is only available for advanced Zimbra Talk users. This tab offers all of the corporate instant messaging features such as Spaces and Channels. 
 
-image::images/videoconference.png[Videoconferencing, 400]  image::images/videoconference.png[Videoconferencing, 400]
+image::images/talk_tab.png[Chat Panel, 800]
 
 Advanced Zimbra Talk users will have three options to interact with other users: Groups, Spaces, and Channel.
 
