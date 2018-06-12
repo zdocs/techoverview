@@ -88,7 +88,7 @@ Zimbra’s mobile access is further enhanced via its Mobile Web Client.
 ===  Flow — Multi-Server Configuration
 The configuration for each deployment is dependent on numerous variables such as the number of mailboxes, mailbox quotas, performance requirements, existing network infrastructure, IT policies, security methodologies, spam filtering requirements, and more. In general, deployments share common characteristics for incoming traffic and user connectivity, as depicted in the following diagram. Alternate methods for configuring numerous points within the network are also possible.
 
-image::images/mailflow.jpg[Mail Flow, 800]
+image::images/mailflow.png[Mail Flow, 800]
 
 The numbered sequences are described below:
 
