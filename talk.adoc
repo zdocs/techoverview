@@ -2,3 +2,12 @@
 == Zimbra Talk V2
 Zimbra Talk V2 is the newest addition to the Zimbra product line-up. Zimbra Talk V2 will be available in version 8.8.8 onwards.
 This is enterprise-level messaging and videoconferencing built inside the Zimbra web client. It includes one-on-one and group messaging and videoconferencing, along with full screen and file sharing capabilities.
+Zimbra Talk V2 inherits some of the features from the previous Zimbra Chat, but the vast majority of the features are new.
+Some of the inherited features from Chat are:
+	- 1-to-1 text messaging
+	- Buddy List Management 
+	- Chat history, which is now saved in the chat panel and not a Chat folder in email
+	- Emojis 
+	- Status or presence management
+	- User preferences 
+	- And it works out of the box with no server configuration. Note that you do need to install the Zimbra Talk Zimlet.
