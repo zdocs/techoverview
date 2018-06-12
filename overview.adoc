@@ -8,7 +8,7 @@ Zimbra includes complete email, contacts, calendar, file-sharing and tasks, and 
 image::images/NE-MAIN.png[Zimbra]
 
 === Next Generation Modules
-NG modules include Real-time Backup, Synchronization of Shared Resources, HSM on Amazon S3 and a new simplified Delegated Admin. These are a subset of all the _Next Generation Tools_ coming in the product.
+NG modules include Real-time Backup, Synchronization of Shared Resources, HSM on Amazon S3 and a new simplified Delegated Admin.
 
 ==== Realtime Backup & Restore 
 Zimbra’s new realtime backup and restore engine backs up every single item and event on your server with split second precision. It’s designed to avoid data loss using atomic and ever-consistent algorithms, while still saving disk space -- up to 50% -- thanks to an intelligent deduplication and compression system. It offers six restore features, from a single-item restore to complete disaster recovery. All of the restore modes are transparent to the end-user and are 100% OS, architecture and version independent.
@@ -21,20 +21,6 @@ What’s new about Zimbra’s mobile sync functionality? Users can now sync thei
 
 ==== Simplified Delegated Admin 
 In minutes, you can now grant Delegated Admin rights to users, allowing them to perform management tasks such as setting quotas, COS and user limits for your domains. Keep track of your Delegated Admins’ actions and your domain status with new reporting features, straight from your Zimbra Administration Console thanks to the dedicated Administration Zimlet.
-
-=== Reconfigured IMAP Service 
-Zimbra 8.8 has a new refactored IMAP service to run separately from all other Zimbra services. IMAP will no longer affect SLAs! Zimbra 8.8 also has improved SIEVE RFC compliance, offering administrators greater email filtering.
-
-=== Zimbra Chat
-Now available in all versions of Zimbra! Peer-to-peer chat using XMPP. Know your company’s chat data is secure and private while your users enjoy searching chat history, emoticons, etc.
-
-=== Zimbra Talk V2
-Zimbra Talk V2 brings secure, high-quality chat and videoconferencing right into the Zimbra Web Client. Users can chat and videoconference 1:1 and in groups, share files, share their screen and so much more. Zimbra Talk V2 is licensed on a per-user basis, and is available in Network Edition only.
-
-Zimbra Chat and Zimbra Talk V2 are not compatible and interoperable, meaning that the two products cannot freely coexist on any Zimbra NE infrastructure. The Zimbra Chat zimlet is uninstalled during the installation process of the Zimbra Talk Zimlet package. However, Zimbra Talk includes all «basic» IM features provided by Zimbra Chat which will be automatically enabled for all users who don’t have access to the «advanced» Zimbra Talk V2 features.
-
-=== Zimbra Drive
-Zimbra Drive offers an integrated file sync and share functionality which needs to be built on an external ownCloud/Nextcloud platform. Zimbra Drive provides seamless synchronization and sharing of files between your users, wherever they are and on any device.
 
 == Other Features
 === Two-Factor Authentication
@@ -60,6 +46,20 @@ If some of your users prefer to work with enterprise email client like Microsoft
 
 === Archiving and Discovery
 Zimbra Archiving & Discovery is an optional feature that enables you archive messages that were delivered to or sent by Zimbra and to search across mailboxes. It’s specially designed for legal and audit purposes.
+
+=== Reconfigured IMAP Service 
+Zimbra 8.8 has a new refactored IMAP service to run separately from all other Zimbra services. IMAP will no longer affect SLAs! Zimbra 8.8 also has improved SIEVE RFC compliance, offering administrators greater email filtering.
+
+=== Zimbra Chat
+Now available in all versions of Zimbra! Peer-to-peer chat using XMPP. Know your company’s chat data is secure and private while your users enjoy searching chat history, emoticons, etc.
+
+=== Zimbra Talk V2
+Zimbra Talk V2 brings secure, high-quality chat and videoconferencing right into the Zimbra Web Client. Users can chat and videoconference 1:1 and in groups, share files, share their screen and so much more. Zimbra Talk V2 is licensed on a per-user basis, and is available in Network Edition only.
+
+Zimbra Chat and Zimbra Talk V2 are not compatible and interoperable, meaning that the two products cannot freely coexist on any Zimbra NE infrastructure. The Zimbra Chat zimlet is uninstalled during the installation process of the Zimbra Talk Zimlet package. However, Zimbra Talk includes all «basic» IM features provided by Zimbra Chat which will be automatically enabled for all users who don’t have access to the «advanced» Zimbra Talk V2 features.
+
+=== Zimbra Drive
+Zimbra Drive offers an integrated file sync and share functionality which needs to be built on an external ownCloud/Nextcloud platform. Zimbra Drive provides seamless synchronization and sharing of files between your users, wherever they are and on any device.
 
 == Zimbra Multi-Tenancy Value Addition
 Zimbra is a multi-tenant platform that can natively host hundreds or thousands of domains with an array of service offerings. Within the Zimbra platform, a set of common service capabilities is called a "Class of Service" (COS), and COS settings can be used to automate users provisioning requirements and establish service levels. For example, one COS can be targeted at “Basic” users with basic services (Webmail, POP, and SMTP), while another COS can provide “Normal” or “Mobile” services (Zimbra Connector for Outlook, over-the-air ActiveSync for mobile devices, sharing calendaring, Documents, Briefcase, etc.).
