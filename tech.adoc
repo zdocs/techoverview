@@ -75,7 +75,7 @@ Zimbra features compatibility with Microsoft Outlook (both Windows and Mac), App
 The Zimbra Connector for Outlook (ZCO) provides real time two-way synchronization of mail, contacts, tasks, and calendar between Outlook and the ZCS server. Outlook for Mac works similarly using the EWS (Exchange Web Services) interface with the ZCS server. Standards-Based clients such as Mozilla Thunderbird, Sunbird, and Eudora can be used with Zimbra to access email and even calendar data because the Zimbra Server uses an all standards-based approach and supports POP, IMAP, iCal, CalDAV, RSS, etc.
 
 [[flow_arch]]
-image::images/mail_flow.jpg[Mail Flow, 400]
+image::images/mail_flow.jpg[Mail Flow, 800]
 
 === Mobile Access
 Zimbra Mobile for smartphones enables two-way, over-the-air synchronization of mail, contacts, calendar and tasks data between the mobile device and the Zimbra Server. It features push email, which sends messages in real time to your device when it arrives on the Zimbra Server. Supported devices must be ActiveSync compatible, for example Apple iPhones, Android smartphones from Samsung, HTC, etc.
