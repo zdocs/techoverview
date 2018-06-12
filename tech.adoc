@@ -26,6 +26,7 @@ Zimbra Collaboration Network Edition v8.6.x, v8.7.x and later is supported on th
 Zimbra is designed to provide an end-to-end mail solution that is scalable and highly reliable. There are 4 major services in Zimbra described below. You can also have all of the services running on a single virtual server or they can be installed separately on multiple servers. If you have less than 1,000 users, it is very common to have only a single virtual server running all of the Zimbra processes.
 
 image::images/logical_arch.png[Logical Architecture, 800]
+image::images/arch_overview.png[Logical Architecture, 800]
 
 In the Zimbra architecture, you can mix and match these services on a server basis. For example, you may have a server that is running the proxy and MTA services, and you may have another server on the backend running the mailboxd and the LDAP services. You can also have different virtual servers for each environment. For example, you might have a virtual server that is running a proxy, a virtual server that is running the MTA, a virtual server that is running LDAP, and a virtual server that is running the mailbox service.
 
