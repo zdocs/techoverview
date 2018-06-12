@@ -11,19 +11,19 @@ image::images/NE-MAIN.png[Zimbra]
 === Next Generation Modules
 NG modules include Real-time Backup, Synchronization of Shared Resources, HSM on Amazon S3 and a new simplified Delegated Admin. These are a subset of all the _Next Generation Tools_ coming in the product.
 
-==== Realtime Backup & Restore (New in 8.8)
+==== Realtime Backup & Restore 
 Zimbra’s new realtime backup and restore engine backs up every single item and event on your server with split second precision. It’s designed to avoid data loss using atomic and ever-consistent algorithms, while still saving disk space -- up to 50% -- thanks to an intelligent deduplication and compression system. It offers six restore features, from a single-item restore to complete disaster recovery. All of the restore modes are transparent to the end-user and are 100% OS, architecture and version independent.
 
-==== Hierarchical Storage Management (HSM) (New in 8.8)
+==== Hierarchical Storage Management (HSM) 
 Featuring advanced Zimbra store management and HSM, you can now manage multiple volumes and HSM policies through your Zimbra Administration Console. Save additional valuable storage space, easily expand your Zimbra server by adding new volumes at will and improve your server performances by splitting the I/O load onto different storage media and use different tiers of storage equipment.
 
-==== Mobile Sync (New in 8.8)
+==== Mobile Sync 
 What’s new about Zimbra’s mobile sync functionality? Users can now sync their shared Zimbra items along with all of their other Zimbra data. Using Exchange ActiveSync protocol, which is natively supported by the vast majority of mobile devices, your data will always be at your fingertips, without any middleware or dedicated client.
 
-==== Simplified Delegated Admin (New in 8.8)
+==== Simplified Delegated Admin 
 In minutes, you can now grant Delegated Admin rights to users, allowing them to perform management tasks such as setting quotas, COS and user limits for your domains. Keep track of your Delegated Admins’ actions and your domain status with new reporting features, straight from your Zimbra Administration Console thanks to the dedicated Administration Zimlet.
 
-=== Reconfigured IMAP Service (Beta in 8.8)
+=== Reconfigured IMAP Service 
 Zimbra 8.8 has a new refactored IMAP service to run separately from all other Zimbra services. IMAP will no longer affect SLAs! Zimbra 8.8 also has improved SIEVE RFC compliance, offering administrators greater email filtering.
 
 === Zimbra Chat
