@@ -37,10 +37,38 @@ Groups are the basic way of communicating with multiple people at the same time 
 
 *Groups Features* 
 
-* A user in a Group can add more users to the Group itself up to the allowed limit.
+* A user in a Group can add more users to the Group itself up to the allowed limit
 
-* A user in a Group can chat with all of the others. Messages sent in a Group are viewed by all members of that Group.
+* A user in a Group can chat with all of the others. Messages sent in a Group are viewed by all members of that Group
 
-* A user in a Group can send files to all of the others. Files sent in a Group are available to all members of that Group.
+* A user in a Group can send files to all of the others. Files sent in a Group are available to all members of that Group
 
-* A user in a Group can start a videoconference with all of the others. Group videoconferences can be joined at any time by all members of the Group.
+* A user in a Group can start a videoconference with all of the others. Group videoconferences can be joined at any time by all members of the Group
+
+*Spaces*
+
+Spaces are a themed container that can hold any number of Channels. A Space is a community portal where people gather to discuss different topics in dedicated areas (named Channels).
+
+*Spaces Features*
+
+* Each space has a unique name and topic. The name cannot be changed after creating the space but the Topic can be edited
+
+* Users in a space can send an email to all members of that space
+
+* Members can leave a space at any time
+
+* Members can create new channels and invite new people to the space
+
+*Channels*
+
+Channels are topic-defined areas inside of a same space. Those can contain any number of users, and unlike groups, users are able to autonomously join any Channel in a Space they are in instead of being invited to it by a member.
+
+*Channels Features*
+
+* A user in a Channel can chat with all of the others
+
+* A user in a Channel can send files to all of the others
+
+* A user in a Channel can start a videoconference with all of the others. 
+
+* Channel videoconferences can be joined at any time by all members of the Channel
