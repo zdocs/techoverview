@@ -28,6 +28,10 @@ include::ports.adoc[]
 
 <<<
 
+include::talk.adoc[]
+
+<<<
+
 include::legal.adoc[]
 
 <<<
