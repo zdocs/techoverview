@@ -7,7 +7,6 @@ Zimbra includes complete email, contacts, calendar, file-sharing and tasks, and 
 
 image::images/NE-MAIN.png[Zimbra]
 
-== New Features with Zimbra {product-version}
 === Next Generation Modules
 NG modules include Real-time Backup, Synchronization of Shared Resources, HSM on Amazon S3 and a new simplified Delegated Admin. These are a subset of all the _Next Generation Tools_ coming in the product.
 
