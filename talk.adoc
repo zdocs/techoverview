@@ -5,21 +5,21 @@ This is enterprise-level messaging and videoconferencing built inside the Zimbra
 
 Zimbra Talk V2 inherits some of the features from the previous Zimbra Chat, but the vast majority of the features are new. Some of the inherited features from Chat are:
 
-* 1-to-1 text messaging
-* Buddy List Management 
-* Chat history
-* Emojis 
-* Status or presence management
-* User preferences
+* *1-to-1 text messaging
+* *Buddy List Management 
+* *Chat history
+* *Emojis 
+* *Status or presence management
+* *User preferences
 
 Zimbra Talk V2 provide advanced features. These features are:
 
-* Message Delivery and Read Awareness. Check marks show delivery or read status
-* Group Messaging. Secure and private messaging for small groups (up to 5 people)
-* Videoconferencing. WebRTC based video, out-of-the-box without any plug-in
-* Corporate Communications. Spaces and Channels for private or organization-wide communications
-* File Sharing
-* Screen Sharing
+* *Message Delivery and Read Awareness.* Check marks show delivery or read status
+* *Group Messaging.* Secure and private messaging for small groups (up to 5 people)
+* *Videoconferencing.* WebRTC based video, out-of-the-box without any plug-in
+* *Corporate Communications.* Spaces and Channels for private or organization-wide communications
+* *File Sharing
+* *Screen Sharing
 
 
 
