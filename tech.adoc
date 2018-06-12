@@ -60,12 +60,6 @@ The mailboxd process is where all the hard work is done. It controls everything 
 
 One of the differences post the Zimbra 8.5 architecture is that we split out the mailboxd process. You now have the option of running static content separately from dynamic content. There is a mailboxd user interface node option in addition to the traditional mailboxd process, which includes the message store, the database information, and the indexing information. This is optional. You do not have to split out these two components.
 
-==== UI Node (Optional)
-Starting in Zimbra 8.5, the mailbox service can offload static content onto the UI node. This improves scalability and uptime when a customer is responsible for updating skins or modifying themes on a regular basis.
-
-[NOTE]
-Separating the UI node is not recommended!
-
 === Proxy
 The Zimbra Proxy is a high performance POP/IMAP/HTTP proxy server that allows end users to access their Zimbra account using end clients such as Chrome/Firefox/IE/Safari, Microsoft Outlook (Windows and Mac), Mozilla Thunderbird, or other POP/IMAP end client software.
 
