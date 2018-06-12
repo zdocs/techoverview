@@ -36,7 +36,10 @@ Groups are the basic way of communicating with multiple people at the same time 
 
 *Groups Features* 
 
-*A user in a Group can add more users to the Group itself up to the allowed limit.
+A user in a Group can add more users to the Group itself up to the allowed limit.
+
 *A user in a Group can chat with all of the others. Messages sent in a Group are viewed by all members of that Group.
+
 *A user in a Group can send files to all of the others. Files sent in a Group are available to all members of that Group.
+
 *A user in a Group can start a videoconference with all of the others. Group videoconferences can be joined at any time by all members of the Group.
