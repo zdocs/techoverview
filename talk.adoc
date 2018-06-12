@@ -69,6 +69,12 @@ Channels are topic-defined areas inside of a same space. Those can contain any n
 
 * A user in a Channel can send files to all of the others
 
-* A user in a Channel can start a videoconference with all of the others. 
+* A user in a Channel can start a videoconference with all of the others
 
 * Channel videoconferences can be joined at any time by all members of the Channel
+
+*Videoconferencing*
+
+Videoconferencing features are available in both Groups and Channels, allowing multiple people to communicate in real-time using a webcam and a headset as well as allowing them to share their screen with all other attendees.
+
+This feature is based on the WebRTC protocol, a peer-to-peer auto-adaptive technology that allows clients to communicate directly without overloading the server and whose call quality is automatically tweaked based on the available bandwidth - with the maximum quality being Full HD for both video and audio. The first time a Videoconference is started, users will need to grant their browser access permissions to their camera and microphone.
