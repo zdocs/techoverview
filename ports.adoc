@@ -1,5 +1,4 @@
 [appendix]
-[[zimbra_ports]]
 
 == Inside Firewall Ports
 
