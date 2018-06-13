@@ -1,6 +1,5 @@
 [appendix]
-= {product-abbrev} 
-
+= 
 
 == Inside Firewall Ports
 
