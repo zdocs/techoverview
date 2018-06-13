@@ -1,6 +1,5 @@
 [appendix]
 [[zimbra_ports]]
-= {product-abbrev}
 
 == Inside Firewall Ports
 
