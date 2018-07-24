@@ -144,10 +144,6 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_testing">Testing</a></li>
 <li><a href="#_migration">Migration</a></li>
 <li><a href="#_audit_and_operations">Audit and Operations</a></li>
-</ul>
-</li>
-<li><a href="#_zcs">Appendix A: ZCS</a>
-<ul class="sectlevel2">
 <li><a href="#_inside_firewall_ports">Inside Firewall Ports</a></li>
 <li><a href="#_outside_firewall_ports">Outside Firewall Ports</a></li>
 <li><a href="#_zimbra_talk_v2_2">Zimbra Talk V2</a></li>
@@ -236,7 +232,7 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect3">
 <h4 id="_smime_digital_signatures_and_encryption">S/MIME Digital Signatures and Encryption</h4>
 <div class="paragraph">
-<p>Zimbra (Network Edition) provides cryptographic security services for email: authentication, message integrity, non-repudiation of origin (using digital signatures) and privacy and data security (using encryption). This old feature has been re-written to support all new standard browsers and work directly out of the box.</p>
+<p>Zimbra (Network Edition) provides cryptographic security services for email: authentication, message integrity, non-repudiation of origin (using digital signatures) and privacy and data security (using encryption). It’s a server-based solution that does not require Java on the client machine. User encrypted certificate and private key are stored on the server, and the server performs all the cryptographic operations.</p>
 </div>
 </div>
 <div class="sect3">
@@ -282,6 +278,12 @@ table.CodeRay td.code>pre{padding:0}
 <h4 id="_zimbra_drive">Zimbra Drive</h4>
 <div class="paragraph">
 <p>Zimbra Drive offers an integrated file sync and share functionality which needs to be built on an external ownCloud/Nextcloud platform. Zimbra Drive provides seamless synchronization and sharing of files between your users, wherever they are and on any device.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_zimbra_docs">Zimbra Docs</h4>
+<div class="paragraph">
+<p>Users can now share and collaborate in documents, spreadsheets and presentations realtime within Zimbra. This feature is in the Zimbra Briefcase, and it is an integration with LibreOffice.</p>
 </div>
 </div>
 </div>
@@ -878,12 +880,10 @@ Zimbra Professional Services is not a bundled offering and is a separate paid se
 <p>Refer to this <a href="https://wiki.zimbra.com/wiki/ZCS_Operational_Best_Practices_-_Scope">ZCS Best Practices reference guide</a> for more information.</p>
 </div>
 <div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>=</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_zcs">Appendix A: ZCS</h2>
-<div class="sectionbody">
 <div class="sect2">
 <h3 id="_inside_firewall_ports">Inside Firewall Ports</h3>
 <table class="tableblock frame-all grid-rows stretch">
@@ -1208,7 +1208,7 @@ Buffalo, New York 14202</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-06-13 10:42:40 EDT
+Last updated 2018-07-24 11:55:48 EDT
 </div>
 </div>
 </body>
