@@ -104,6 +104,6 @@ The numbered sequences are described below:
 
 6. After obtaining the user’s information from the Zimbra Collaboration LDPA server, the MTA server sends the mail to the appropriate Zimbra Collaboration server.
 
-7. Internal end-user connections are made directly to any Zimbra Collaboration server that then obtains the user’s directory information from Zimbra Collaboration LDAP and redirects the user, as needed.
+7. Internal end-user connections are made directly to any Zimbra Collaboration server that then obtains the user’s directory information from Zimbra Collaboration LDAP and redirects the user, as needed. 
 
 8. The backups from the Zimbra Collaboration servers can be processed to a mounted disk.
