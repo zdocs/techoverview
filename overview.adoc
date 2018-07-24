@@ -36,7 +36,7 @@ Keeping spambots away, Zimbra Postscreen leaves more SMTP server processes avail
 Apply security patches and Zimbra updates easier than ever before. Simply use your OS update commands, and all of your Zimbra packages will be updated as well. This is still a work in progress and full controls will be available in a future release.
 
 === S/MIME Digital Signatures and Encryption
-Zimbra (Network Edition) provides cryptographic security services for email: authentication, message integrity, non-repudiation of origin (using digital signatures) and privacy and data security (using encryption). This old feature has been re-written to support all new standard browsers and work directly out of the box.
+Zimbra (Network Edition) provides cryptographic security services for email: authentication, message integrity, non-repudiation of origin (using digital signatures) and privacy and data security (using encryption). It’s a server-based solution that does not require Java on the client machine. User encrypted certificate and private key are stored on the server, and the server performs all the cryptographic operations.
 
 === Exchange Web Services
 If your users are using an enterprise email client like Microsoft Outlook, Zimbra provides Exchange Web Services, which allows your users to connect to their entire mailbox on a Mac. Microsoft Outlook 2011 and Microsoft Outlook 2016 are both supported.
