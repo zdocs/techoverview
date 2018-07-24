@@ -61,6 +61,9 @@ Zimbra Chat and Zimbra Talk V2 are not compatible and interoperable, meaning tha
 === Zimbra Drive
 Zimbra Drive offers an integrated file sync and share functionality which needs to be built on an external ownCloud/Nextcloud platform. Zimbra Drive provides seamless synchronization and sharing of files between your users, wherever they are and on any device.
 
+=== Zimbra Docs
+Users can now share and collaborate in documents, spreadsheets and presentations realtime within Zimbra. This feature is in the Zimbra Briefcase, and it is an integration with LibreOffice.
+
 == Zimbra Multi-Tenancy Value Addition
 Zimbra is a multi-tenant platform that can natively host hundreds or thousands of domains with an array of service offerings. Within the Zimbra platform, a set of common service capabilities is called a "Class of Service" (COS), and COS settings can be used to automate users provisioning requirements and establish service levels. For example, one COS can be targeted at “Basic” users with basic services (Webmail, POP, and SMTP), while another COS can provide “Normal” or “Mobile” services (Zimbra Connector for Outlook, over-the-air ActiveSync for mobile devices, sharing calendaring, Documents, Briefcase, etc.).
 
