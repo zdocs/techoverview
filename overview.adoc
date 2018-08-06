@@ -1,7 +1,7 @@
 [[overview]]
 = Zimbra Overview
 
-Zimbra Collaboration is the world’s leading open source messaging and collaboration solution, trusted by more than 5,000 Enterprises, Public Sector organizations and Service Providers, providing mailbox services for hundereds of millions of end users, in over 140 countries.
+Zimbra Collaboration is the world’s leading open source messaging and collaboration solution, trusted by more than 5,000 Enterprises, Public Sector organizations and Service Providers, providing mailbox services for hundreds of millions of end users, in over 140 countries.
 
 Zimbra includes complete email, contacts, calendar, file-sharing and tasks, and can be accessed from the Zimbra Web client via any device. Featuring the most innovative cross-platform web application today, compatibility with all devices and desktops, Zimbra boosts end-user productivity at dramatically lower costs compared to other legacy solutions. Zimbra provides an open platform designed for virtualization and portability across private and public clouds, making it simpler to manage and more cost effective to scale. Zimbra is the world leader in Open Source based, next-generation messaging and collaboration software.
 
