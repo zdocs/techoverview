@@ -1,5 +1,7 @@
-[TALK]
-== Zimbra Talk V2
+[appendix]
+[[TALK]]
+= Zimbra Talk V2
+
 Zimbra Talk V2 is the newest addition to the Zimbra product line-up. Zimbra Talk V2 will be available in version 8.8.8 onwards.
 This is enterprise-level messaging and videoconferencing built inside the Zimbra web client. It includes one-on-one and group messaging and videoconferencing, along with full screen and file sharing capabilities.
 
@@ -29,7 +31,7 @@ The *Chat Panel* is available to all users - basic and advanced - for text messa
 
 image::images/panel_chat.png[Chat Panel, 600]
 
-The *Zimbra Talk* tab is only available for advanced Zimbra Talk users. This tab offers all of the corporate instant messaging features such as Spaces and Channels. 
+The *Zimbra Talk* tab is only available for advanced Zimbra Talk users. This tab offers all of the corporate instant messaging features such as Spaces and Channels.
 
 image::images/talk_tab.png[Chat Panel, 600]
 
@@ -39,7 +41,7 @@ Advanced Zimbra Talk users will have three options to interact with other users:
 
 Groups are the basic way of communicating with multiple people at the same time (up to 5 total). Those are non-persistent entities that are not tied to any specific space: any user can create a group inviting people from their Buddy List and any group member can invite more people in the same way. When all users leave a group, the group itself ceases to exist.
 
-*Groups Features* 
+*Groups Features*
 
 * A user in a Group can add more users to the Group itself up to the allowed limit
 

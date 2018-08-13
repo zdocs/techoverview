@@ -85,7 +85,7 @@ Zimbra’s mobile access is further enhanced via its Mobile Web Client.
 * Mobile Web Browsers - All devices with HTML capable browsers, have real time access to the Zimbra Server using our Mobile Web Client. Zimbra’s Mobile Web Client allows users access to their email, contacts, and calendar. This provides on-the-go access to the Zimbra experience to virtually all end-users.
 * Responsive Design – Zimbra web client adapts itself to the device being used. Tablets have a new layout based on the Sencha framework and the smaller mobile browsers use an xHTML format.
 
-===  Flow — Multi-Server Configuration
+===  Mail Flow in a Multi-Server Configuration
 The configuration for each deployment is dependent on numerous variables such as the number of mailboxes, mailbox quotas, performance requirements, existing network infrastructure, IT policies, security methodologies, spam filtering requirements, and more. In general, deployments share common characteristics for incoming traffic and user connectivity, as depicted in the following diagram. Alternate methods for configuring numerous points within the network are also possible.
 
 image::images/mailflow.png[Mail Flow, 800]
@@ -104,6 +104,6 @@ The numbered sequences are described below:
 
 6. After obtaining the user’s information from the Zimbra Collaboration LDPA server, the MTA server sends the mail to the appropriate Zimbra Collaboration server.
 
-7. Internal end-user connections are made directly to any Zimbra Collaboration server that then obtains the user’s directory information from Zimbra Collaboration LDAP and redirects the user, as needed. 
+7. Internal end-user connections are made directly to any Zimbra Collaboration server that then obtains the user’s directory information from Zimbra Collaboration LDAP and redirects the user, as needed.
 
 8. The backups from the Zimbra Collaboration servers can be processed to a mounted disk.
