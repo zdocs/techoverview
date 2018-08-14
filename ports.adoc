@@ -20,6 +20,8 @@
 |7995 |POP Proxy to Mailbox Servers (SSL)
 |8080 |Proxy to Mailbox Server
 |8443 |Proxy to Mailbox Server if using SSL at Proxy
+|8443 |Mailbox Server to Zimbra Docs (both ways for HTTPS backend)
+|9091 |incoming traffic from all mailbox and proxy servers to Docs Server Extension
 |9071 |Zimbra Administration if using Admin Web Interface through Proxy
 |======
 
@@ -37,4 +39,5 @@
 |443 |Connect to Zimbra Mail over HTTPS
 |993 |IMAP SSL
 |995 |POP SSL
+|5222|XMPP (TLS) - Direct to Mailbox required
 |======
