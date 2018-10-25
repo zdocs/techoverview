@@ -149,8 +149,6 @@ and Discovery, contact Zimbra sales.
 
 |=======================================================================
 
-
-
 == Supported Operating Systems
 Zimbra Collaboration Network Edition v8.6.x, v8.7.x and later is supported on the following operating systems:
 
