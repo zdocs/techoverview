@@ -785,6 +785,13 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#TALK">Appendix B: Zimbra Talk V2</a></li>
+<li><a href="#zimbra_docs">Zimbra Docs</a>
+<ul class="sectlevel2">
+<li><a href="#_components">Components</a></li>
+<li><a href="#_document_management_flow">Document Management Flow</a></li>
+<li><a href="#_networking_and_ports">Networking and ports</a></li>
+</ul>
+</li>
 <li><a href="#_license">License</a></li>
 </ul>
 </div>
@@ -2121,6 +2128,166 @@ This is enterprise-level messaging and videoconferencing built inside the Zimbra
 </div>
 </div>
 <div class="sect1">
+<h2 id="zimbra_docs">Zimbra Docs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Zimbra Docs is based on a heavily customized LibreOffice online package allowing for collaborative editing of documents, spreadsheets and presentations straight from the Zimbra WebClient.</p>
+</div>
+<div class="sect2">
+<h3 id="_components">Components</h3>
+<div class="sect3">
+<h4 id="_zimbra_docs_server">Zimbra Docs Server</h4>
+<div class="paragraph">
+<p>The Zimbra Docs server is the heart of the service. The service hosts each document opened through a LibreOffice engine and responds to the client via an image upon every keystroke and change in the document.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This component must be installed on one or more dedicated nodes running Ubuntu 16.04 LTS.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_zimbra_docs_extension">Zimbra Docs Extension</h4>
+<div class="paragraph">
+<p>The extension is the key component which coordinates everything. Its main tasks are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Select which Docs server the next document will be opened on.</p>
+</li>
+<li>
+<p>Redirect the client when it needs to open a document.</p>
+</li>
+<li>
+<p>Read and write documents to and from system storage on behalf of the Docs server.</p>
+</li>
+<li>
+<p>Connect to each Docs server via an administrative websocket and keep track of the availability and the resource usage of each.</p>
+</li>
+<li>
+<p>Orchestrate concurrent user connections to the same document in the same server. (document sharing)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Zimbra Docs Extension is contained within the NG modules package together with the NG Core.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_zimbra_docs_zimlet">Zimbra Docs Zimlet</h4>
+<div class="paragraph">
+<p>A Zimbra Docs Zimlet handles the integration with briefcase and with email attachments. It is a thin web client which connects to a native server instance via websocket, renders a document and only sends changes to the client in order to keep the fidelity of the document on par with a desktop client while at the same time reducing the bandwidth to the bare minimum.</p>
+</div>
+<div class="paragraph">
+<p>Documents in preview and attachments are shown in read-only mode with a simplified interface, while edit mode has a full interface.</p>
+</div>
+<div class="paragraph">
+<p>Its main tasks are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Change the "create" button in the ZWC to the related Docs feature.</p>
+</li>
+<li>
+<p>Change the preview feature to use Docs.</p>
+</li>
+<li>
+<p>Allow the preview of documents.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_document_management_flow">Document Management Flow</h3>
+<div class="paragraph">
+<p>This is what happens "behind the scenes" when a user creates a new document:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The Zimlet prompts the Extension to create a new empty document</p>
+</li>
+<li>
+<p>The Extension creates the document and returns the document&#8217;s ID to the client</p>
+</li>
+<li>
+<p>The Zimlet opens a new Zimbra tab containing an iframe pointing towards '/service/extension/wopi-proxy'</p>
+</li>
+<li>
+<p>The extension receives the request from the client, creates a new token for the needed document, and replies with a new url</p>
+</li>
+<li>
+<p>The new url points toward <code>/docs/[docs-node-id]/[token]</code>, which will be proxied by nginx to the specific Docs Server node</p>
+</li>
+<li>
+<p>The Docs Server will respond with the web application in Javascript</p>
+</li>
+<li>
+<p>The web application opens a websocket connection, going through the nginx</p>
+</li>
+<li>
+<p>Docs Server receives the websocket connection along with a token, sends a <code>read wopi</code> command towards the mailbox url indicated
+in the parameters (the url is validates against allowed nodes)</p>
+</li>
+<li>
+<p>The Extension validates the token and replies with information and content</p>
+</li>
+<li>
+<p>The Docs Server node parses the document, renders it and sends it back to the client.</p>
+</li>
+<li>
+<p>The document is fully opened and editable.</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Open document
+                                  redirect to docs
+    +------------------------+             +----------------------+
+    |     Zimbra Proxy       |             |       Mailbox        |
+    |                        +-------------&gt;                      |
+    |      Nginx             |             | Zimbra Docs Extension|
+    +------------------------+             +----------------------+
+                      |                        |              ^
+                      |                        |              |
+                      |                        |             WOPI:
+                      |                   Admin Web          Read/Write
+                      |                   Socket             Documents
+                      |                        |              |
+                      |                        |              |
+                      |                        |              |
+                      |                    +---v----------------+
+                      |                    |                    |
+                      +--------------------&gt;   Docs Server      |
+                   Load Client             |                    |
+                   Open client websocket   +--------------------+</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_networking_and_ports">Networking and ports</h3>
+<div class="paragraph">
+<p>All mailbox servers will need to be able to directly communicate with the Docs Server over port 8443 (HTTPS Backend), which must be open on both ends.</p>
+</div>
+<div class="paragraph">
+<p>The Docs Server communicates with the Extension through port 9091, so incoming traffic from all mailbox and proxy servers to that port must be allowed. The Docs Server component must also be able to directly communicate with the master LDAP server as well as with all Proxy servers.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_license">License</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2143,7 +2310,7 @@ Buffalo, New York 14202</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-08-13 10:49:48 +08
+Last updated 2018-10-25 23:31:35 +08
 </div>
 </div>
 </body>
