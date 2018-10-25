@@ -1,3 +1,4 @@
+[appendix]
 [[zimbra_docs]]
 = Zimbra Docs
 
