@@ -1,0 +1,81 @@
+[[zimbra_docs]]
+= Zimbra Docs
+
+Zimbra Docs is based on a heavily customized LibreOffice online package allowing for collaborative editing of documents, spreadsheets and presentations straight from the Zimbra WebClient.
+
+== Components
+=== Zimbra Docs Server
+
+The Zimbra Docs server is the heart of the service. The service hosts each document opened through a LibreOffice engine and responds to the client via an image upon every keystroke and change in the document.
+
+IMPORTANT: This component must be installed on one or more dedicated nodes running Ubuntu 16.04 LTS.
+
+=== Zimbra Docs Extension
+
+The extension is the key component which coordinates everything. Its main tasks are:
+
+* Select which Docs server the next document will be opened on.
+* Redirect the client when it needs to open a document.
+* Read and write documents to and from system storage on behalf of the Docs server.
+* Connect to each Docs server via an administrative websocket and keep track of the availability and the resource usage of each.
+* Orchestrate concurrent user connections to the same document in the same server. (document sharing)
+
+The Zimbra Docs Extension is contained within the NG modules package together with the NG Core.
+
+=== Zimbra Docs Zimlet
+
+A Zimbra Docs Zimlet handles the integration with briefcase and with email attachments. It is a thin web client which connects to a native server instance via websocket, renders a document and only sends changes to the client in order to keep the fidelity of the document on par with a desktop client while at the same time reducing the bandwidth to the bare minimum.
+
+Documents in preview and attachments are shown in read-only mode with a simplified interface, while edit mode has a full interface.
+
+Its main tasks are:
+
+* Change the "create" button in the ZWC to the related Docs feature.
+* Change the preview feature to use Docs.
+* Allow the preview of documents.
+
+== Document Management Flow
+
+This is what happens "behind the scenes" when a user creates a new document:
+
+. The Zimlet prompts the Extension to create a new empty document
+. The Extension creates the document and returns the document's ID to the client
+. The Zimlet opens a new Zimbra tab containing an iframe pointing towards '/service/extension/wopi-proxy'
+. The extension receives the request from the client, creates a new token for the needed document, and replies with a new url
+. The new url points toward `/docs/[docs-node-id]/[token]`, which will be proxied by nginx to the specific Docs Server node
+. The Docs Server will respond with the web application in Javascript
+. The web application opens a websocket connection, going through the nginx
+. Docs Server receives the websocket connection along with a token, sends a `read wopi` command towards the mailbox url indicated
+in the parameters (the url is validates against allowed nodes)
+. The Extension validates the token and replies with information and content
+. The Docs Server node parses the document, renders it and sends it back to the client.
+. The document is fully opened and editable.
+
+....
+Open document
+                                  redirect to docs
+    +------------------------+             +----------------------+
+    |     Zimbra Proxy       |             |       Mailbox        |
+    |                        +------------->                      |
+    |      Nginx             |             | Zimbra Docs Extension|
+    +------------------------+             +----------------------+
+                      |                        |              ^
+                      |                        |              |
+                      |                        |             WOPI:
+                      |                   Admin Web          Read/Write
+                      |                   Socket             Documents
+                      |                        |              |
+                      |                        |              |
+                      |                        |              |
+                      |                    +---v----------------+
+                      |                    |                    |
+                      +-------------------->   Docs Server      |
+                   Load Client             |                    |
+                   Open client websocket   +--------------------+
+....
+
+
+== Networking and ports
+All mailbox servers will need to be able to directly communicate with the Docs Server over port 8443 (HTTPS Backend), which must be open on both ends.
+
+The Docs Server communicates with the Extension through port 9091, so incoming traffic from all mailbox and proxy servers to that port must be allowed. The Docs Server component must also be able to directly communicate with the master LDAP server as well as with all Proxy servers.
