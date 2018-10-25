@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.7.1">
+<title>Zimbra Collaboration Technical Overview</title>
+<style>
+@import url(http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.0/css/font-awesome.css);
+/* normalize.css v2.1.1 | MIT License | git.io/normalize */
+/* ========================================================================== HTML5 display definitions ========================================================================== */
+/** Correct `block` display not defined in IE 8/9. */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary { display: block; }
+
+/** Correct `inline-block` display not defined in IE 8/9. */
+audio, canvas, video { display: inline-block; }
+
+/** Prevent modern browsers from displaying `audio` without controls. Remove excess height in iOS 5 devices. */
+audio:not([controls]) { display: none; height: 0; }
+
+/** Address styling not present in IE 8/9. */
+[hidden] { display: none; }
+
+/* ========================================================================== Base ========================================================================== */
+/** 1. Prevent system color scheme's background color being used in Firefox, IE, and Opera. 2. Prevent system color scheme's text color being used in Firefox, IE, and Opera. 3. Set default font family to sans-serif. 4. Prevent iOS text size adjust after orientation change, without disabling user zoom. */
+html { background: #fff; /* 1 */ color: #000; /* 2 */ font-family: sans-serif; /* 3 */ -ms-text-size-adjust: 100%; /* 4 */ -webkit-text-size-adjust: 100%; /* 4 */ }
+
+/** Remove default margin. */
+body { margin: 0; }
+
+/* ========================================================================== Links ========================================================================== */
+/** Address `outline` inconsistency between Chrome and other browsers. */
+a:focus { outline: thin dotted; }
+
+/** Improve readability when focused and also mouse hovered in all browsers. */
+a:active, a:hover { outline: 0; }
+
+/* ========================================================================== Typography ========================================================================== */
+/** Address variable `h1` font-size and margin within `section` and `article` contexts in Firefox 4+, Safari 5, and Chrome. */
+h1 { font-size: 2em; margin: 0.67em 0; }
+
+/** Address styling not present in IE 8/9, Safari 5, and Chrome. */
+abbr[title] { border-bottom: 1px dotted; }
+
+/** Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome. */
+b, strong { font-weight: bold; }
+
+/** Address styling not present in Safari 5 and Chrome. */
+dfn { font-style: italic; }
+
+/** Address differences between Firefox and other browsers. */
+hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
+
+/** Address styling not present in IE 8/9. */
+mark { background: #ff0; color: #000; }
+
+/** Correct font family set oddly in Safari 5 and Chrome. */
+code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+
+/** Improve readability of pre-formatted text in all browsers. */
+pre { white-space: pre-wrap; }
+
+/** Set consistent quote types. */
+q { quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+/** Address inconsistent and variable font size in all browsers. */
+small { font-size: 80%; }
+
+/** Prevent `sub` and `sup` affecting `line-height` in all browsers. */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+
+sup { top: -0.5em; }
+
+sub { bottom: -0.25em; }
+
+/* ========================================================================== Embedded content ========================================================================== */
+/** Remove border when inside `a` element in IE 8/9. */
+img { border: 0; }
+
+/** Correct overflow displayed oddly in IE 9. */
+svg:not(:root) { overflow: hidden; }
+
+/* ========================================================================== Figures ========================================================================== */
+/** Address margin not present in IE 8/9 and Safari 5. */
+figure { margin: 0; }
+
+/* ========================================================================== Forms ========================================================================== */
+/** Define consistent border, margin, and padding. */
+fieldset { border: 1px solid #c0c0c0; margin: 0 2px; padding: 0.35em 0.625em 0.75em; }
+
+/** 1. Correct `color` not being inherited in IE 8/9. 2. Remove padding so people aren't caught out if they zero out fieldsets. */
+legend { border: 0; /* 1 */ padding: 0; /* 2 */ }
+
+/** 1. Correct font family not being inherited in all browsers. 2. Correct font size not being inherited in all browsers. 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome. */
+button, input, select, textarea { font-family: inherit; /* 1 */ font-size: 100%; /* 2 */ margin: 0; /* 3 */ }
+
+/** Address Firefox 4+ setting `line-height` on `input` using `!important` in the UA stylesheet. */
+button, input { line-height: normal; }
+
+/** Address inconsistent `text-transform` inheritance for `button` and `select`. All other form control elements do not inherit `text-transform` values. Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+. Correct `select` style inheritance in Firefox 4+ and Opera. */
+button, select { text-transform: none; }
+
+/** 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio` and `video` controls. 2. Correct inability to style clickable `input` types in iOS. 3. Improve usability and consistency of cursor style between image-type `input` and others. */
+button, html input[type="button"], input[type="reset"], input[type="submit"] { -webkit-appearance: button; /* 2 */ cursor: pointer; /* 3 */ }
+
+/** Re-set default cursor for disabled elements. */
+button[disabled], html input[disabled] { cursor: default; }
+
+/** 1. Address box sizing set to `content-box` in IE 8/9. 2. Remove excess padding in IE 8/9. */
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; /* 1 */ padding: 0; /* 2 */ }
+
+/** 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome. 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome (include `-moz` to future-proof). */
+input[type="search"] { -webkit-appearance: textfield; /* 1 */ -moz-box-sizing: content-box; -webkit-box-sizing: content-box; /* 2 */ box-sizing: content-box; }
+
+/** Remove inner padding and search cancel button in Safari 5 and Chrome on OS X. */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+
+/** Remove inner padding and border in Firefox 4+. */
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+
+/** 1. Remove default vertical scrollbar in IE 8/9. 2. Improve readability and alignment in all browsers. */
+textarea { overflow: auto; /* 1 */ vertical-align: top; /* 2 */ }
+
+/* ========================================================================== Tables ========================================================================== */
+/** Remove most spacing between table cells. */
+table { border-collapse: collapse; border-spacing: 0; }
+
+*, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html, body { font-size: 100%; }
+
+body { background: white; color: #222222; padding: 0; margin: 0; font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-weight: normal; font-style: normal; line-height: 1; position: relative; cursor: auto; }
+
+a:hover { cursor: pointer; }
+
+a:focus { outline: none; }
+
+img, object, embed { max-width: 100%; height: auto; }
+
+object, embed { height: 100%; }
+
+img { -ms-interpolation-mode: bicubic; }
+
+#map_canvas img, #map_canvas embed, #map_canvas object, .map_canvas img, .map_canvas embed, .map_canvas object { max-width: none !important; }
+
+.left { float: left !important; }
+
+.right { float: right !important; }
+
+.text-left { text-align: left !important; }
+
+.text-right { text-align: right !important; }
+
+.text-center { text-align: center !important; }
+
+.text-justify { text-align: justify !important; }
+
+.hide { display: none; }
+
+.antialiased, body { -webkit-font-smoothing: antialiased; }
+
+img { display: inline-block; vertical-align: middle; }
+
+textarea { height: auto; min-height: 50px; }
+
+select { width: 100%; }
+
+p.lead, .paragraph.lead > p, #preamble > .sectionbody > .paragraph:first-of-type p { font-size: 1.21875em; line-height: 1.6; }
+
+.subheader, #content #toctitle, .admonitionblock td.content > .title, .exampleblock > .title, .imageblock > .title, .videoblock > .title, .listingblock > .title, .literalblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, .sidebarblock > .title, .tableblock > .title, .verseblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title, .tableblock > caption { line-height: 1.4; color: #980050; font-weight: 300; margin-top: 0.2em; margin-bottom: 0.5em; }
+
+/* Typography resets */
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6, pre, form, p, blockquote, th, td { margin: 0; padding: 0; direction: ltr; }
+
+/* Default Link Styles */
+a { color: #b1005d; text-decoration: none; line-height: inherit; }
+a:hover, a:focus { color: #640035; }
+a img { border: none; }
+
+/* Default paragraph styles */
+p { font-family: inherit; font-weight: normal; font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; text-rendering: optimizeLegibility; }
+p aside { font-size: 0.875em; line-height: 1.35; font-style: italic; }
+
+/* Default header styles */
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-weight: normal; font-style: normal; color: #333333; text-rendering: optimizeLegibility; margin-top: 1em; margin-bottom: 0.5em; line-height: 1.2125em; }
+h1 small, h2 small, h3 small, #toctitle small, .sidebarblock > .content > .title small, h4 small, h5 small, h6 small { font-size: 60%; color: gray; line-height: 0; }
+
+h1 { font-size: 2.125em; }
+
+h2 { font-size: 1.6875em; }
+
+h3, #toctitle, .sidebarblock > .content > .title { font-size: 1.375em; }
+
+h4 { font-size: 1.125em; }
+
+h5 { font-size: 1.125em; }
+
+h6 { font-size: 1em; }
+
+hr { border: dotted #cccccc; border-width: 1px 0 0; clear: both; margin: 1.25em 0 1.1875em; height: 0; }
+
+/* Helpful Typography Defaults */
+em, i { font-style: italic; line-height: inherit; }
+
+strong, b { font-weight: bold; line-height: inherit; }
+
+small { font-size: 60%; line-height: inherit; }
+
+code { font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #320348; }
+
+/* Lists */
+ul, ol, dl { font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
+
+ul, ol { margin-left: 1.5em; }
+
+/* Unordered Lists */
+ul li ul, ul li ol { margin-left: 1.25em; margin-bottom: 0; font-size: 1em; /* Override nested font-size change */ }
+ul.square li ul, ul.circle li ul, ul.disc li ul { list-style: inherit; }
+ul.square { list-style-type: square; }
+ul.circle { list-style-type: circle; }
+ul.disc { list-style-type: disc; }
+ul.no-bullet { list-style: none; }
+
+/* Ordered Lists */
+ol li ul, ol li ol { margin-left: 1.25em; margin-bottom: 0; }
+
+/* Definition Lists */
+dl dt { margin-bottom: 0.3125em; font-weight: bold; }
+dl dd { margin-bottom: 1.25em; }
+
+/* Abbreviations */
+abbr, acronym { text-transform: uppercase; font-size: 90%; color: #555555; border-bottom: 1px dotted #dddddd; cursor: help; }
+
+abbr { text-transform: none; }
+
+/* Blockquotes */
+blockquote { margin: 0 0 1.25em; padding: 0.5625em 1.25em 0 1.1875em; border-left: 1px solid #efefef; }
+blockquote cite { display: block; font-size: 0.8125em; color: #5e5e5e; }
+blockquote cite:before { content: "\2014 \0020"; }
+blockquote cite a, blockquote cite a:visited { color: #5e5e5e; }
+
+blockquote, blockquote p { line-height: 1.6; color: #777777; }
+
+/* Microformats */
+.vcard { display: inline-block; margin: 0 0 1.25em 0; border: 1px solid #dddddd; padding: 0.625em 0.75em; }
+.vcard li { margin: 0; display: block; }
+.vcard .fn { font-weight: bold; font-size: 0.9375em; }
+
+.vevent .summary { font-weight: bold; }
+.vevent abbr { cursor: auto; text-decoration: none; font-weight: bold; border: none; padding: 0 0.0625em; }
+
+@media only screen and (min-width: 768px) { h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { line-height: 1.4; }
+  h1 { font-size: 2.75em; }
+  h2 { font-size: 2.3125em; }
+  h3, #toctitle, .sidebarblock > .content > .title { font-size: 1.6875em; }
+  h4 { font-size: 1.4375em; } }
+/* Print styles.  Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/ Credit to Paul Irish and HTML5 Boilerplate (html5boilerplate.com)
+*/
+.print-only { display: none !important; }
+
+@media print { * { background: transparent !important; color: #000 !important; /* Black prints faster: h5bp.com/s */ box-shadow: none !important; text-shadow: none !important; }
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; /* h5bp.com/t */ }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3, #toctitle, .sidebarblock > .content > .title { orphans: 3; widows: 3; }
+  h2, h3, #toctitle, .sidebarblock > .content > .title { page-break-after: avoid; }
+  .hide-on-print { display: none !important; }
+  .print-only { display: block !important; }
+  .hide-for-print { display: none !important; }
+  .show-for-print { display: inherit !important; } }
+/* Tables */
+table { background: white; margin-bottom: 1.25em; border: solid 1px #dddddd; }
+table thead, table tfoot { background: whitesmoke; font-weight: normal; }
+table thead tr th, table thead tr td, table tfoot tr th, table tfoot tr td { padding: 0.5em 0.625em 0.625em; font-size: inherit; color: #333333; text-align: left; }
+table tr th, table tr td { padding: 0.5625em 0.625em; font-size: inherit; color: #555555; }
+table tr.even, table tr.alt, table tr:nth-of-type(even) { background: #f9f9f9; }
+table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoot tr td { display: table-cell; line-height: 1.4; }
+
+.clearfix:before, .clearfix:after, .float-group:before, .float-group:after { content: " "; display: table; }
+.clearfix:after, .float-group:after { clear: both; }
+
+*:not(pre) > code { font-size: inherit; padding: 0; white-space: nowrap; background-color: inherit; border: 0 solid #dddddd; -webkit-border-radius: 0; border-radius: 0; text-shadow: none; }
+
+pre, pre > code { line-height: 1.4; color: black; font-family: monospace, serif; font-weight: normal; }
+
+kbd.keyseq { color: #888888; }
+
+kbd:not(.keyseq) { display: inline-block; color: #555555; font-size: 0.75em; line-height: 1.4; background-color: #F7F7F7; border: 1px solid #ccc; -webkit-border-radius: 3px; border-radius: 3px; -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset; margin: -0.15em 0.15em 0 0.15em; padding: 0.2em 0.6em 0.2em 0.5em; vertical-align: middle; white-space: nowrap; }
+
+kbd kbd:first-child { margin-left: 0; }
+
+kbd kbd:last-child { margin-right: 0; }
+
+.menuseq, .menu { color: #3b3b3b; }
+
+#header, #content, #footnotes, #footer { width: 100%; margin-left: auto; margin-right: auto; margin-top: 0; margin-bottom: 0; max-width: 62.5em; *zoom: 1; position: relative; padding-left: 0.9375em; padding-right: 0.9375em; }
+#header:before, #header:after, #content:before, #content:after, #footnotes:before, #footnotes:after, #footer:before, #footer:after { content: " "; display: table; }
+#header:after, #content:after, #footnotes:after, #footer:after { clear: both; }
+
+#header { margin-bottom: 2.5em; }
+#header > h1 { color: #b1005d; font-weight: normal; border-bottom: 1px dotted #cccccc; margin-bottom: -28px; padding-bottom: 32px; }
+#header span { color: #777777; }
+#header #revnumber { text-transform: capitalize; }
+#header br { display: none; }
+#header br + span { padding-left: 3px; }
+#header br + span:before { content: "\2013 \0020"; }
+#header br + span.author { padding-left: 0; }
+#header br + span.author:before { content: ", "; }
+
+#toc { border-bottom: 1px solid #cccccc; padding-bottom: 1.25em; }
+#toc > ul { margin-left: 0.25em; }
+#toc ul.sectlevel0 > li > a { font-style: italic; }
+#toc ul.sectlevel0 ul.sectlevel1 { margin-left: 0; margin-top: 0.5em; margin-bottom: 0.5em; }
+#toc ul { list-style-type: none; }
+
+#toctitle { color: #980050; }
+
+@media only screen and (min-width: 1280px) { body.toc2 { padding-left: 20em; }
+  #toc.toc2 { position: fixed; width: 20em; left: 0; top: 0; border-right: 1px solid #cccccc; border-bottom: 0; z-index: 1000; padding: 1em; height: 100%; overflow: auto; }
+  #toc.toc2 #toctitle { margin-top: 0; }
+  #toc.toc2 > ul { font-size: .95em; }
+  #toc.toc2 ul ul { margin-left: 0; padding-left: 1.25em; }
+  #toc.toc2 ul.sectlevel0 ul.sectlevel1 { padding-left: 0; margin-top: 0.5em; margin-bottom: 0.5em; }
+  body.toc2.toc-right { padding-left: 0; padding-right: 20em; }
+  body.toc2.toc-right #toc.toc2 { border-right: 0; border-left: 1px solid #cccccc; left: auto; right: 0; } }
+#content #toc { border-style: solid; border-width: 1px; border-color: #d9d9d9; margin-bottom: 1.25em; padding: 1.25em; background: #f2f2f2; border-width: 0; -webkit-border-radius: 0; border-radius: 0; }
+#content #toc > :first-child { margin-top: 0; }
+#content #toc > :last-child { margin-bottom: 0; }
+#content #toc a { text-decoration: none; }
+
+#content #toctitle { font-weight: bold; font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-size: 1em; padding-left: 0.125em; }
+
+#footer { max-width: 100%; background-color: #272727; padding: 1.25em; }
+
+#footer-text { color: #bcbcbc; line-height: 1.44; }
+
+.sect1 { padding-bottom: 1.25em; }
+
+.sect1 + .sect1 { border-top: 1px solid #cccccc; }
+
+#content h1 > a.anchor, h2 > a.anchor, h3 > a.anchor, #toctitle > a.anchor, .sidebarblock > .content > .title > a.anchor, h4 > a.anchor, h5 > a.anchor, h6 > a.anchor { position: absolute; width: 1em; margin-left: -1em; display: block; text-decoration: none; visibility: hidden; text-align: center; font-weight: normal; }
+#content h1 > a.anchor:before, h2 > a.anchor:before, h3 > a.anchor:before, #toctitle > a.anchor:before, .sidebarblock > .content > .title > a.anchor:before, h4 > a.anchor:before, h5 > a.anchor:before, h6 > a.anchor:before { content: '\00A7'; font-size: .85em; vertical-align: text-top; display: block; margin-top: 0.05em; }
+#content h1:hover > a.anchor, #content h1 > a.anchor:hover, h2:hover > a.anchor, h2 > a.anchor:hover, h3:hover > a.anchor, #toctitle:hover > a.anchor, .sidebarblock > .content > .title:hover > a.anchor, h3 > a.anchor:hover, #toctitle > a.anchor:hover, .sidebarblock > .content > .title > a.anchor:hover, h4:hover > a.anchor, h4 > a.anchor:hover, h5:hover > a.anchor, h5 > a.anchor:hover, h6:hover > a.anchor, h6 > a.anchor:hover { visibility: visible; }
+#content h1 > a.link, h2 > a.link, h3 > a.link, #toctitle > a.link, .sidebarblock > .content > .title > a.link, h4 > a.link, h5 > a.link, h6 > a.link { color: #333333; text-decoration: none; }
+#content h1 > a.link:hover, h2 > a.link:hover, h3 > a.link:hover, #toctitle > a.link:hover, .sidebarblock > .content > .title > a.link:hover, h4 > a.link:hover, h5 > a.link:hover, h6 > a.link:hover { color: #262626; }
+
+.imageblock, .literalblock, .listingblock, .verseblock, .videoblock { margin-bottom: 1.25em; }
+
+.admonitionblock td.content > .title, .exampleblock > .title, .imageblock > .title, .videoblock > .title, .listingblock > .title, .literalblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, .sidebarblock > .title, .tableblock > .title, .verseblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title { text-align: left; font-weight: bold; }
+
+.tableblock > caption { text-align: left; font-weight: bold; white-space: nowrap; overflow: visible; max-width: 0; }
+
+table.tableblock #preamble > .sectionbody > .paragraph:first-of-type p { font-size: inherit; }
+
+.admonitionblock > table { border: 0; background: none; width: 100%; }
+.admonitionblock > table td.icon { text-align: center; width: 80px; }
+.admonitionblock > table td.icon img { max-width: none; }
+.admonitionblock > table td.icon .title { font-weight: bold; text-transform: uppercase; }
+.admonitionblock > table td.content { padding-left: 1.125em; padding-right: 1.25em; border-left: 1px dotted #cccccc; color: #777777; }
+.admonitionblock > table td.content > :last-child > :last-child { margin-bottom: 0; }
+
+.exampleblock > .content { border-style: solid; border-width: 1px; border-color: #e6e6e6; margin-bottom: 1.25em; padding: 1.25em; background: white; -webkit-border-radius: 0; border-radius: 0; }
+.exampleblock > .content > :first-child { margin-top: 0; }
+.exampleblock > .content > :last-child { margin-bottom: 0; }
+.exampleblock > .content h1, .exampleblock > .content h2, .exampleblock > .content h3, .exampleblock > .content #toctitle, .sidebarblock.exampleblock > .content > .title, .exampleblock > .content h4, .exampleblock > .content h5, .exampleblock > .content h6, .exampleblock > .content p { color: #555555; }
+.exampleblock > .content h1, .exampleblock > .content h2, .exampleblock > .content h3, .exampleblock > .content #toctitle, .sidebarblock.exampleblock > .content > .title, .exampleblock > .content h4, .exampleblock > .content h5, .exampleblock > .content h6 { line-height: 1; margin-bottom: 0.625em; }
+.exampleblock > .content h1.subheader, .exampleblock > .content h2.subheader, .exampleblock > .content h3.subheader, .exampleblock > .content .subheader#toctitle, .sidebarblock.exampleblock > .content > .subheader.title, .exampleblock > .content h4.subheader, .exampleblock > .content h5.subheader, .exampleblock > .content h6.subheader { line-height: 1.4; }
+
+.exampleblock.result > .content { -webkit-box-shadow: 0 1px 8px #d9d9d9; box-shadow: 0 1px 8px #d9d9d9; }
+
+.sidebarblock { border-style: solid; border-width: 1px; border-color: #d9d9d9; margin-bottom: 1.25em; padding: 1.25em; background: #f2f2f2; -webkit-border-radius: 0; border-radius: 0; }
+.sidebarblock > :first-child { margin-top: 0; }
+.sidebarblock > :last-child { margin-bottom: 0; }
+.sidebarblock h1, .sidebarblock h2, .sidebarblock h3, .sidebarblock #toctitle, .sidebarblock > .content > .title, .sidebarblock h4, .sidebarblock h5, .sidebarblock h6, .sidebarblock p { color: #555555; }
+.sidebarblock h1, .sidebarblock h2, .sidebarblock h3, .sidebarblock #toctitle, .sidebarblock > .content > .title, .sidebarblock h4, .sidebarblock h5, .sidebarblock h6 { line-height: 1; margin-bottom: 0.625em; }
+.sidebarblock h1.subheader, .sidebarblock h2.subheader, .sidebarblock h3.subheader, .sidebarblock .subheader#toctitle, .sidebarblock > .content > .subheader.title, .sidebarblock h4.subheader, .sidebarblock h5.subheader, .sidebarblock h6.subheader { line-height: 1.4; }
+.sidebarblock > .content > .title { color: #980050; margin-top: 0; line-height: 1.6; }
+
+.exampleblock > .content > :last-child > :last-child, .exampleblock > .content .olist > ol > li:last-child > :last-child, .exampleblock > .content .ulist > ul > li:last-child > :last-child, .exampleblock > .content .qlist > ol > li:last-child > :last-child, .sidebarblock > .content > :last-child > :last-child, .sidebarblock > .content .olist > ol > li:last-child > :last-child, .sidebarblock > .content .ulist > ul > li:last-child > :last-child, .sidebarblock > .content .qlist > ol > li:last-child > :last-child { margin-bottom: 0; }
+
+.literalblock > .content pre, .listingblock > .content pre { background: #efefef; border-width: 1px; border-style: solid; border-color: #cccccc; -webkit-border-radius: 0; border-radius: 0; padding: 0.75em 0.75em 0.625em 0.75em; word-wrap: break-word; }
+.literalblock > .content pre.nowrap, .listingblock > .content pre.nowrap { overflow-x: auto; white-space: pre; word-wrap: normal; }
+.literalblock > .content pre > code, .listingblock > .content pre > code { display: block; }
+@media only screen { .literalblock > .content pre, .listingblock > .content pre { font-size: 0.72em; } }
+@media only screen and (min-width: 768px) { .literalblock > .content pre, .listingblock > .content pre { font-size: 0.81em; } }
+@media only screen and (min-width: 1280px) { .literalblock > .content pre, .listingblock > .content pre { font-size: 0.9em; } }
+
+.listingblock > .content { position: relative; }
+
+.listingblock:hover code[class*=" language-"]:before { text-transform: uppercase; font-size: 0.9em; color: #999; position: absolute; top: 0.375em; right: 0.375em; }
+
+.listingblock:hover code.asciidoc:before { content: "asciidoc"; }
+.listingblock:hover code.clojure:before { content: "clojure"; }
+.listingblock:hover code.css:before { content: "css"; }
+.listingblock:hover code.groovy:before { content: "groovy"; }
+.listingblock:hover code.html:before { content: "html"; }
+.listingblock:hover code.java:before { content: "java"; }
+.listingblock:hover code.javascript:before { content: "javascript"; }
+.listingblock:hover code.python:before { content: "python"; }
+.listingblock:hover code.ruby:before { content: "ruby"; }
+.listingblock:hover code.scss:before { content: "scss"; }
+.listingblock:hover code.xml:before { content: "xml"; }
+.listingblock:hover code.yaml:before { content: "yaml"; }
+
+.listingblock.terminal pre .command:before { content: attr(data-prompt); padding-right: 0.5em; color: #999; }
+
+.listingblock.terminal pre .command:not([data-prompt]):before { content: '$'; }
+
+table.pyhltable { border: 0; margin-bottom: 0; }
+
+table.pyhltable td { vertical-align: top; padding-top: 0; padding-bottom: 0; }
+
+table.pyhltable td.code { padding-left: .75em; padding-right: 0; }
+
+.highlight.pygments .lineno, table.pyhltable td:not(.code) { color: #999; padding-left: 0; padding-right: .5em; border-right: 1px solid #cccccc; }
+
+.highlight.pygments .lineno { display: inline-block; margin-right: .25em; }
+
+table.pyhltable .linenodiv { background-color: transparent !important; padding-right: 0 !important; }
+
+.quoteblock { margin: 0 0 1.25em; padding: 0.5625em 1.25em 0 1.1875em; border-left: 1px solid #efefef; }
+.quoteblock blockquote { margin: 0 0 1.25em 0; padding: 0 0 0.5625em 0; border: 0; }
+.quoteblock blockquote > .paragraph:last-child p { margin-bottom: 0; }
+.quoteblock .attribution { margin-top: -.25em; padding-bottom: 0.5625em; font-size: 0.8125em; color: #5e5e5e; }
+.quoteblock .attribution br { display: none; }
+.quoteblock .attribution cite { display: block; margin-bottom: 0.625em; }
+
+table thead th, table tfoot th { font-weight: normal; }
+
+table.tableblock.grid-all { border-collapse: separate; border-spacing: 1px; -webkit-border-radius: 0; border-radius: 0; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; }
+
+table.tableblock.frame-topbot, table.tableblock.frame-none { border-left: 0; border-right: 0; }
+
+table.tableblock.frame-sides, table.tableblock.frame-none { border-top: 0; border-bottom: 0; }
+
+table.tableblock td .paragraph:last-child p, table.tableblock td > p:last-child { margin-bottom: 0; }
+
+th.tableblock.halign-left, td.tableblock.halign-left { text-align: left; }
+
+th.tableblock.halign-right, td.tableblock.halign-right { text-align: right; }
+
+th.tableblock.halign-center, td.tableblock.halign-center { text-align: center; }
+
+th.tableblock.valign-top, td.tableblock.valign-top { vertical-align: top; }
+
+th.tableblock.valign-bottom, td.tableblock.valign-bottom { vertical-align: bottom; }
+
+th.tableblock.valign-middle, td.tableblock.valign-middle { vertical-align: middle; }
+
+p.tableblock.header { color: #333333; font-weight: normal; }
+
+td > div.verse { white-space: pre; }
+
+ol { margin-left: 1.75em; }
+
+ul li ol { margin-left: 1.5em; }
+
+dl dd { margin-left: 1.125em; }
+
+dl dd:last-child, dl dd:last-child > :last-child { margin-bottom: 0; }
+
+ol > li p, ul > li p, ul dd, ol dd, .olist .olist, .ulist .ulist, .ulist .olist, .olist .ulist { margin-bottom: 0.625em; }
+
+ul.unstyled, ol.unnumbered, ul.checklist, ul.none { list-style-type: none; }
+
+ul.unstyled, ol.unnumbered, ul.checklist { margin-left: 0.625em; }
+
+ul.checklist li > p:first-child > i[class^="icon-check"]:first-child, ul.checklist li > p:first-child > input[type="checkbox"]:first-child { margin-right: 0.25em; }
+
+ul.checklist li > p:first-child > input[type="checkbox"]:first-child { position: relative; top: 1px; }
+
+ul.inline { margin: 0 auto 0.625em auto; margin-left: -1.375em; margin-right: 0; padding: 0; list-style: none; overflow: hidden; }
+ul.inline > li { list-style: none; float: left; margin-left: 1.375em; display: block; }
+ul.inline > li > * { display: block; }
+
+.unstyled dl dt { font-weight: normal; font-style: normal; }
+
+ol.arabic { list-style-type: decimal; }
+
+ol.decimal { list-style-type: decimal-leading-zero; }
+
+ol.loweralpha { list-style-type: lower-alpha; }
+
+ol.upperalpha { list-style-type: upper-alpha; }
+
+ol.lowerroman { list-style-type: lower-roman; }
+
+ol.upperroman { list-style-type: upper-roman; }
+
+ol.lowergreek { list-style-type: lower-greek; }
+
+.hdlist > table, .colist > table { border: 0; background: none; }
+.hdlist > table > tbody > tr, .colist > table > tbody > tr { background: none; }
+
+td.hdlist1 { padding-right: .8em; font-weight: bold; }
+
+td.hdlist1, td.hdlist2 { vertical-align: top; }
+
+.literalblock + .colist, .listingblock + .colist { margin-top: -0.5em; }
+
+.colist > table tr > td:first-of-type { padding: 0 .8em; line-height: 1; }
+.colist > table tr > td:last-of-type { padding: 0.25em 0; }
+
+.qanda > ol > li > p > em:only-child { color: #980050; }
+
+.thumb, .th { line-height: 0; display: inline-block; border: solid 4px white; -webkit-box-shadow: 0 0 0 1px #dddddd; box-shadow: 0 0 0 1px #dddddd; }
+
+.imageblock.left, .imageblock[style*="float: left"] { margin: 0.25em 0.625em 1.25em 0; }
+.imageblock.right, .imageblock[style*="float: right"] { margin: 0.25em 0 1.25em 0.625em; }
+.imageblock > .title { margin-bottom: 0; }
+.imageblock.thumb, .imageblock.th { border-width: 6px; }
+.imageblock.thumb > .title, .imageblock.th > .title { padding: 0 0.125em; }
+
+.image.left, .image.right { margin-top: 0.25em; margin-bottom: 0.25em; display: inline-block; line-height: 0; }
+.image.left { margin-right: 0.625em; }
+.image.right { margin-left: 0.625em; }
+
+a.image { text-decoration: none; }
+
+span.footnote, span.footnoteref { vertical-align: super; font-size: 0.875em; }
+span.footnote a, span.footnoteref a { text-decoration: none; }
+
+#footnotes { padding-top: 0.75em; padding-bottom: 0.75em; margin-bottom: 0.625em; }
+#footnotes hr { width: 20%; min-width: 6.25em; margin: -.25em 0 .75em 0; border-width: 1px 0 0 0; }
+#footnotes .footnote { padding: 0 0.375em; line-height: 1.3; font-size: 0.875em; margin-left: 1.2em; text-indent: -1.2em; margin-bottom: .2em; }
+#footnotes .footnote a:first-of-type { font-weight: bold; text-decoration: none; }
+#footnotes .footnote:last-of-type { margin-bottom: 0; }
+
+#content #footnotes { margin-top: -0.625em; margin-bottom: 0; padding: 0.75em 0; }
+
+.gist .file-data > table { border: none; background: #fff; width: 100%; margin-bottom: 0; }
+.gist .file-data > table td.line-data { width: 99%; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+.big { font-size: larger; }
+
+.small { font-size: smaller; }
+
+.underline { text-decoration: underline; }
+
+.overline { text-decoration: overline; }
+
+.line-through { text-decoration: line-through; }
+
+.aqua { color: #00bfbf; }
+
+.aqua-background { background-color: #00fafa; }
+
+.black { color: black; }
+
+.black-background { background-color: black; }
+
+.blue { color: #0000bf; }
+
+.blue-background { background-color: #0000fa; }
+
+.fuchsia { color: #bf00bf; }
+
+.fuchsia-background { background-color: #fa00fa; }
+
+.gray { color: #606060; }
+
+.gray-background { background-color: #7d7d7d; }
+
+.green { color: #006000; }
+
+.green-background { background-color: #007d00; }
+
+.lime { color: #00bf00; }
+
+.lime-background { background-color: #00fa00; }
+
+.maroon { color: #600000; }
+
+.maroon-background { background-color: #7d0000; }
+
+.navy { color: #000060; }
+
+.navy-background { background-color: #00007d; }
+
+.olive { color: #606000; }
+
+.olive-background { background-color: #7d7d00; }
+
+.purple { color: #600060; }
+
+.purple-background { background-color: #7d007d; }
+
+.red { color: #bf0000; }
+
+.red-background { background-color: #fa0000; }
+
+.silver { color: #909090; }
+
+.silver-background { background-color: #bcbcbc; }
+
+.teal { color: #006060; }
+
+.teal-background { background-color: #007d7d; }
+
+.white { color: #bfbfbf; }
+
+.white-background { background-color: #fafafa; }
+
+.yellow { color: #bfbf00; }
+
+.yellow-background { background-color: #fafa00; }
+
+span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
+
+.admonitionblock td.icon [class^="icon-"]:before { font-size: 2.5em; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); cursor: default; }
+.admonitionblock td.icon .icon-note:before { content: "\f05a"; color: #b1005d; color: #850046; }
+.admonitionblock td.icon .icon-tip:before { content: "\f0eb"; text-shadow: 1px 1px 2px rgba(155, 155, 0, 0.8); color: #111; }
+.admonitionblock td.icon .icon-warning:before { content: "\f071"; color: #bf6900; }
+.admonitionblock td.icon .icon-caution:before { content: "\f06d"; color: #bf3400; }
+.admonitionblock td.icon .icon-important:before { content: "\f06a"; color: #bf0000; }
+
+.conum { display: inline-block; color: white !important; background-color: #555555; -webkit-border-radius: 100px; border-radius: 100px; text-align: center; width: 20px; height: 20px; font-size: 12px; font-weight: bold; line-height: 20px; font-family: Arial, sans-serif; font-style: normal; position: relative; top: -2px; letter-spacing: -1px; }
+.conum * { color: white !important; }
+.conum + b { display: none; }
+.conum:after { content: attr(data-value); }
+.conum:not([data-value]):empty { display: none; }
+
+#header > h1 { border-bottom-style: solid; }
+
+#toctitle { color: #333333; }
+
+.listingblock > .content > pre, .literalblock > .content > pre { background: -moz-linear-gradient(top, white 0%, #f4f4f4 100%); background: -webkit-linear-gradient(top, white 0%, #f4f4f4 100%); background: linear-gradient(to bottom, #ffffff 0%, #f4f4f4 100%); -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); }
+
+.sidebarblock { background: none; border: none; -webkit-box-shadow: 0 0 5px rgba(177, 0, 93, 0.5); box-shadow: 0 0 5px rgba(177, 0, 93, 0.5); }
+.sidebarblock > .content > .title { color: #181818; }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+/*pre.CodeRay {background-color:#f7f7f8;}*/
+.CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
+.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
+table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
+table.CodeRay td{vertical-align: top;line-height:1.45}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
+table.CodeRay td.code{padding:0 0 0 .5em}
+table.CodeRay td.code>pre{padding:0}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}
+</style>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Zimbra Collaboration Technical Overview</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#overview">Zimbra Overview</a>
+<ul class="sectlevel2">
+<li><a href="#_new_features_with_zimbra">New Features with Zimbra</a></li>
+<li><a href="#_other_features">Other Features</a></li>
+<li><a href="#_zimbra_multi_tenancy_value_addition">Zimbra Multi-Tenancy Value Addition</a></li>
+</ul>
+</li>
+<li><a href="#tech">Technical Overview</a>
+<ul class="sectlevel2">
+<li><a href="#_zimbra_components">Zimbra Components</a></li>
+<li><a href="#_zimbra_application_packages">Zimbra Application Packages</a></li>
+<li><a href="#_supported_operating_systems">Supported Operating Systems</a></li>
+<li><a href="#_zimbra_components_overview">Zimbra Components Overview</a></li>
+<li><a href="#_client_access">Client Access</a></li>
+</ul>
+</li>
+<li><a href="#architecture">Zimbra Architecture</a>
+<ul class="sectlevel2">
+<li><a href="#_message_and_file_store">Message and File Store</a></li>
+<li><a href="#_metadata_sql_store">Metadata SQL Store</a></li>
+<li><a href="#_search">Search</a></li>
+<li><a href="#_lucene_index">Lucene Index</a></li>
+<li><a href="#_other_services_and_access_methods">Other Services and Access Methods</a></li>
+</ul>
+</li>
+<li><a href="#_high_availability_and_scalability">High Availability and Scalability</a>
+<ul class="sectlevel2">
+<li><a href="#_high_availability">High Availability</a></li>
+<li><a href="#_scalability">Scalability</a></li>
+</ul>
+</li>
+<li><a href="#_proposed_project_approach">Proposed Project Approach</a>
+<ul class="sectlevel2">
+<li><a href="#_assessment_and_solution_design">Assessment and Solution Design</a></li>
+<li><a href="#_zimbra_deployment_and_configuration">Zimbra Deployment and Configuration</a></li>
+<li><a href="#_testing">Testing</a></li>
+<li><a href="#_migration">Migration</a></li>
+<li><a href="#_audit_and_operations">Audit and Operations</a></li>
+</ul>
+</li>
+<li><a href="#zimbra_ports">Appendix A: ZCS Firewall Ports</a>
+<ul class="sectlevel2">
+<li><a href="#_inside_firewall_ports">Inside Firewall Ports</a></li>
+<li><a href="#_outside_firewall_ports">Outside Firewall Ports</a></li>
+</ul>
+</li>
+<li><a href="#TALK">Appendix B: Zimbra Talk V2</a></li>
+<li><a href="#_license">License</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview">Zimbra Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Zimbra Collaboration is the world’s leading open source messaging and collaboration solution, trusted by more than 5,000 Enterprises, Public Sector organizations and Service Providers, providing mailbox services for hundreds of millions of end users, in over 140 countries.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra includes complete email, contacts, calendar, file-sharing and tasks, and can be accessed from the Zimbra Web client via any device. Featuring the most innovative cross-platform web application today, compatibility with all devices and desktops, Zimbra boosts end-user productivity at dramatically lower costs compared to other legacy solutions. Zimbra provides an open platform designed for virtualization and portability across private and public clouds, making it simpler to manage and more cost effective to scale. Zimbra is the world leader in Open Source based, next-generation messaging and collaboration software.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Zimbra-chat-active.png" alt="Zimbra">
+</div>
+</div>
+<div class="paragraph">
+<p>The Zimbra Collaboration architecture is built with well-known open source technologies and standards-based protocols. The architecture consists of client interfaces and server components that can run as a single node configuration or be deployed across multiple servers for high availability and increased scalability.</p>
+</div>
+<div class="paragraph">
+<p>The architecture includes the following core advantages:</p>
+</div>
+<table class="tableblock frame-all grid-rows stretch">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Core Advantage</th>
+<th class="tableblock halign-left valign-top">Components/Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open source integrations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linux&#174;, Jetty, Postfix, MariaDB, OpenLDAP&#174;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Industry-standard open protocols</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMTP, LMTP, SOAP, XML, IMAP, POP</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modern technology Design</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTML5, Javascript, XML, and Java</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scalability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each Zimbra mailbox server includes its own mailbox accounts and associated
+message store and indexes. The Zimbra platform scales vertically (by adding
+more system resources) and horizontally (by adding more servers)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browser-based client interface</p></td>
+<td class="tableblock halign-left valign-middle" rowspan="2"><p class="tableblock">Easy, intuitive access to Zimbra Collaboration features, using a standard
+web platform.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browser-based Administration Console</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_new_features_with_zimbra">New Features with Zimbra</h3>
+<div class="sect3">
+<h4 id="_next_generation_modules">Next Generation Modules</h4>
+<div class="paragraph">
+<p>NG modules include Real-time Backup, Synchronization of Shared Resources, HSM on Amazon S3 and a new simplified Delegated Admin.</p>
+</div>
+<div class="sect4">
+<h5 id="_realtime_backup_restore">Realtime Backup &amp; Restore</h5>
+<div class="paragraph">
+<p>Zimbra’s new realtime backup and restore engine backs up every single item and event on your server with split second precision. It’s designed to avoid data loss using atomic and ever-consistent algorithms, while still saving disk space <em>up to 50%</em> thanks to an intelligent deduplication and compression system. It offers six restore features, from a single-item restore to complete disaster recovery. All of the restore modes are transparent to the end-user and are 100% OS, architecture and version independent.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_hierarchical_storage_management_hsm">Hierarchical Storage Management (HSM)</h5>
+<div class="paragraph">
+<p>Featuring advanced Zimbra store management and HSM, you can now manage multiple volumes and HSM policies through your Zimbra Administration Console. Save additional valuable storage space, easily expand your Zimbra server by adding new volumes at will and improve your server performances by splitting the I/O load onto different storage media and use different tiers of storage equipment.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_mobile_sync">Mobile Sync</h5>
+<div class="paragraph">
+<p>What’s new about Zimbra’s mobile sync functionality? Users can now sync their shared Zimbra items along with all of their other Zimbra data. Using Exchange ActiveSync protocol, which is natively supported by the vast majority of mobile devices, your data will always be at your fingertips, without any middleware or dedicated client. With version 8.8.9, there is another new secuity feature added, which is ABQ (Allow, Block, Quaratine)</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_simplified_delegated_admin">Simplified Delegated Admin</h5>
+<div class="paragraph">
+<p>In minutes, you can now grant Delegated Admin rights to users, allowing them to perform management tasks such as setting quotas, COS and user limits for your domains. Keep track of your Delegated Admins’ actions and your domain status with new reporting features, straight from your Zimbra Administration Console thanks to the dedicated Administration Zimlet.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_other_features">Other Features</h3>
+<div class="sect3">
+<h4 id="_two_factor_authentication">Two-Factor Authentication</h4>
+<div class="paragraph">
+<p>Zimbra includes now two-factor authentication, making your mailbox more secure by providing a physical layer to produce a successful and secure login.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ssl_sni_for_https">SSL SNI for HTTPS</h4>
+<div class="paragraph">
+<p>Zimbra SSL SNI allows the server to present multiple certificates on the same IP address and TCP port number, so multiple hostnames can be served over HTTPS from the same IP address.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_postscreen_for_zimbra_mta_boosts_email_security">Postscreen for Zimbra MTA boosts Email Security</h4>
+<div class="paragraph">
+<p>Keeping spambots away, Zimbra Postscreen leaves more SMTP server processes available for legitimate clients, and delays the onset of server overload conditions.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_zimbra_collaboration_packaging_system">Zimbra Collaboration Packaging System</h4>
+<div class="paragraph">
+<p>Apply security patches and Zimbra updates easier than ever before. Simply use your OS update commands, and all of your Zimbra packages will be updated as well. This is still a work in progress and full controls will be available in a future release.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_smime_digital_signatures_and_encryption">S/MIME Digital Signatures and Encryption</h4>
+<div class="paragraph">
+<p>Zimbra (Network Edition) provides cryptographic security services for email: authentication, message integrity, non-repudiation of origin (using digital signatures) and privacy and data security (using encryption). It’s a server-based solution that does not require Java on the client machine. User encrypted certificate and private key are stored on the server, and the server performs all the cryptographic operations.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exchange_web_services">Exchange Web Services</h4>
+<div class="paragraph">
+<p>If your users are using an enterprise email client like Microsoft Outlook, Zimbra provides Exchange Web Services, which allows your users to connect to their entire mailbox on a Mac. Microsoft Outlook 2011 and Microsoft Outlook 2016 are both supported.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_outlook_synchronization_zco">Outlook Synchronization ZCO</h4>
+<div class="paragraph">
+<p>If some of your users prefer to work with enterprise email client like Microsoft Outlook, Zimbra provides a MAPI Connector which allows your users see their entire mailbox in Microsoft Windows using Microsoft Outlook 2010 and above.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_archiving_and_discovery">Archiving and Discovery</h4>
+<div class="paragraph">
+<p>Zimbra Archiving &amp; Discovery is an optional feature that enables you archive messages that were delivered to or sent by Zimbra and to search across mailboxes. It’s specially designed for legal and audit purposes.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_reconfigured_imap_service">Reconfigured IMAP Service</h4>
+<div class="paragraph">
+<p>Zimbra 8.8 has a new refactored IMAP service to run separately from all other Zimbra services. IMAP will no longer affect SLAs! Zimbra 8.8 also has improved SIEVE RFC compliance, offering administrators greater email filtering.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_zimbra_chat">Zimbra Chat</h4>
+<div class="paragraph">
+<p>Now available in all versions of Zimbra! Peer-to-peer chat using XMPP. Know your company’s chat data is secure and private while your users enjoy searching chat history, emoticons, etc.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_zimbra_talk_v2">Zimbra Talk V2</h4>
+<div class="paragraph">
+<p>Zimbra Talk V2 brings secure, high-quality chat and videoconferencing right into the Zimbra Web Client. Users can chat and videoconference 1:1 and in groups, share files, share their screen and so much more. Zimbra Talk V2 is licensed on a per-user basis, and is available in Network Edition only.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra Chat and Zimbra Talk V2 are not compatible and interoperable, meaning that the two products cannot freely coexist on any Zimbra NE infrastructure. The Zimbra Chat zimlet is uninstalled during the installation process of the Zimbra Talk Zimlet package. However, Zimbra Talk includes all «basic» IM features provided by Zimbra Chat which will be automatically enabled for all users who don’t have access to the «advanced» Zimbra Talk V2 features.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_zimbra_drive">Zimbra Drive</h4>
+<div class="paragraph">
+<p>Zimbra Drive offers an integrated file sync and share functionality which needs to be built on an external ownCloud/Nextcloud platform. Zimbra Drive provides seamless synchronization and sharing of files between your users, wherever they are and on any device.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_zimbra_docs">Zimbra Docs</h4>
+<div class="paragraph">
+<p>Users can now share and collaborate in documents, spreadsheets and presentations realtime within Zimbra. This feature is in the Zimbra Briefcase, and it is an integration with LibreOffice.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_zimbra_multi_tenancy_value_addition">Zimbra Multi-Tenancy Value Addition</h3>
+<div class="paragraph">
+<p>Zimbra is a multi-tenant platform that can natively host hundreds or thousands of domains with an array of service offerings. Within the Zimbra platform, a set of common service capabilities is called a "Class of Service" (COS), and COS settings can be used to automate users provisioning requirements and establish service levels. For example, one COS can be targeted at “Basic” users with basic services (Webmail, POP, and SMTP), while another COS can provide “Normal” or “Mobile” services (Zimbra Connector for Outlook, over-the-air ActiveSync for mobile devices, sharing calendaring, Documents, Briefcase, etc.).</p>
+</div>
+<div class="paragraph">
+<p>Zimbra features and preferences can be set in the account profile for individual users or by the Class of Service (COS) for multiple users/groups when accounts are created. These settings can be modified at any time and are easily controlled via the Zimbra Admin interface. When deploying a Zimbra email infrastructure, multiple Class of Services can be defined and users will inherit the functions, features and branding associated with the COS to which they provisioned. When a user is provisioned into a specific COS they will automatic inherit the features and settings as defined in the COS, however it is possible to override COS attributes at a per user account level as part of the provisioning process.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tech">Technical Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Zimbra is an innovative messaging and collaboration application that offers the following state-of-the-art solutions that are accessed through the browser based web client.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Intuitive message management, search, tagging, and sharing.</p>
+</li>
+<li>
+<p>Personal, external, and shared calendar.</p>
+</li>
+<li>
+<p>Personal and shared Address Books and Distribution Lists.</p>
+</li>
+<li>
+<p>Personal and Shared Task lists.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_zimbra_components">Zimbra Components</h3>
+<div class="paragraph">
+<p>Zimbra architecture includes open-source integrations using industry standard protocols. The third-party software listed in <a href="#table_tps">Third-Party Software</a> is bundled with Zimbra software and installed as part of the installation process. These components have been tested and configured to work with the software.</p>
+</div>
+<table id="table_tps" class="tableblock frame-all grid-rows stretch">
+<caption class="title">Table 1. Third-Party Software</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">3rd-Party Component</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jetty</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Web application server that runs Zimbra software.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Postfix</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Open source mail transfer agent (MTA) that routes mail messages to the
+appropriate Zimbra server</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open LDAP software</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Open source implementation of the Lightweight Directory Access Protocol
+(LDAP) that stores Zimbra system configuration, the Zimbra Global Address
+List, and provides user authentication. Zimbra can also work with GAL and
+authentication services provided by external LDAP directories such as
+Active Directory</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MariaDB</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Database software</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lucene</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Open source full-featured text and search engine</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Third-party source that converts certain attachment file types to HTML</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anti-virus/anti-spam</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Open source components that include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ClamAV, an anti-virus scanner that protects against malicious files</p>
+</li>
+<li>
+<p>SpamAssassin, a mail filter that attempts to identify spam</p>
+</li>
+<li>
+<p>Amavisd-new interfaces between the MTA and one or more content checkers</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache JSieve</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Manages filters for email</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LibreOffice</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>High fidelity document preview</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_zimbra_application_packages">Zimbra Application Packages</h3>
+<div class="paragraph">
+<p>Zimbra Collaboration provides the application packages listed in
+<a href="#table_app_pkgs">Application Packages</a>.</p>
+</div>
+<table id="table_app_pkgs" class="tableblock frame-all grid-rows stretch">
+<caption class="title">Table 2. Application Packages</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Package</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Core</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The libraries, utilities, monitoring tools, and basic configuration
+files. <code>zmconfigd</code> is contained in the zimbra-core and is automatically
+enabled to run on all systems.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Store</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The components for the mailbox server (including Jetty). The Zimbra mailbox
+server includes the following components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Data store</strong>&#8201;&#8212;&#8201;A MariaDB database.</p>
+</li>
+<li>
+<p><strong>Message store</strong>&#8201;&#8212;&#8201;Location of all email messages and file attachments.</p>
+</li>
+<li>
+<p><strong>Index store</strong>&#8201;&#8212;&#8201;Index and search technology is provided through
+Lucene. Index files are maintained for each mailbox.</p>
+</li>
+<li>
+<p><strong>Web application services</strong>&#8201;&#8212;&#8201;The Jetty web application server runs web
+applications (webapps) on any store server. It provides one or more web
+application services.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra LDAP</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Zimbra Collaboration uses the OpenLDAP&#174; software, which is an open source LDAP
+directory server. User authentication, the Zimbra Global Address List, and
+configuration attributes are services provided through OpenLDAP. Note that
+the Zimbra GAL and authentication services can be provided by an external
+LDAP Directory such as Active Directory.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra MTA</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Postfix is the open source mail transfer agent (MTA) that receives email
+via SMTP and routes each message to the appropriate Zimbra mailbox server
+using Local Mail Transfer Protocol (LMTP). The Zimbra MTA also includes the
+anti-virus and anti-spam components.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Proxy</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Zimbra Proxy is a high-performance reverse proxy service for passing
+IMAP[S]/POP[S]/HTTP[S] client requests to other internal ZCS
+services.This package is normally installed on the MTA server(s) or on its
+own independent server(s). When the zimbra-proxy package is installed, the
+proxy feature is enabled by default. Installing the Zimbra Proxy is highly
+recommended, and required if using a separate web application server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Memcached</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Memcached is automatically selected when the zimbra-proxy is installed. At
+least one server must run zimbra-memcached when the proxy is in use. You
+can use a single memcached server with one or more Zimbra
+proxies. zimbra-memcached is required if using a separate web application
+server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra SNMP (Optional)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If you choose to install zimbra-SNMP for monitoring, this package should be
+installed on every Zimbra server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Logger (Optional)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If used, this is installed on one mailbox server, and must be installed at
+the same time as the mailbox server.The Zimbra Logger installs tools for
+syslog aggregation and reporting. If you do not install Logger, the <strong>server
+statistics</strong> section of the Administration Console will not display.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Spell (Optional)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Aspell is the open source spell checker used on the Zimbra Web Client. When
+Zimbra-Spell is installed, the Zimbra-Apache package is also installed.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Apache</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>This package is installed automatically when Zimbra Spell or Zimbra
+Convertd is installed.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Convertd</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>This package is installed on the zimbra-store server. Only one
+Zimbra-convertd package needs to be present in the Zimbra Collaboration
+environment. The default is to install one zimbra-convertd on each
+zimbra-store server. When Zimbra-Convertd is installed, the Zimbra-Apache
+package is also installed.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Archiving (Optional)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Archiving and Discovery offers the ability to store and search all messages
+delivered to, or sent by the Zimbra Collaboration Server. This package includes
+the cross mailbox search function which can be used for both live and
+archive mailbox searches. Note: Using Archiving and Discovery can trigger
+additional mailbox license usage. To find out more about Zimbra Archiving
+and Discovery, contact Zimbra sales.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_supported_operating_systems">Supported Operating Systems</h3>
+<div class="paragraph">
+<p>Zimbra Collaboration Network Edition v8.6.x, v8.7.x and later is supported on the following operating systems:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Red Hat Enterprise Linux 7</p>
+</li>
+<li>
+<p>CentOS Linux 7</p>
+</li>
+<li>
+<p>Red Hat Enterprise Linux 6, patch level 4 or later is required</p>
+</li>
+<li>
+<p>CentOS Linux 6, patch level 4 or later is required</p>
+</li>
+<li>
+<p>Oracle Linux 7.2</p>
+</li>
+<li>
+<p>Oracle Linux 6.6</p>
+</li>
+<li>
+<p>Ubuntu 16.04 LTS</p>
+</li>
+<li>
+<p>Ubuntu 14.04 LTS</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_zimbra_components_overview">Zimbra Components Overview</h3>
+<div class="paragraph">
+<p>Zimbra is designed to provide an end-to-end mail solution that is scalable and highly reliable. There are 4 major services in Zimbra described below. You can also have all of the services running on a single virtual server or they can be installed separately on multiple servers. If you have less than 1,000 users, it is very common to have only a single virtual server running all of the Zimbra processes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/arch_overview.png" alt="Logical Architecture" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>In the Zimbra architecture, you can mix and match these services on a server basis. For example, you may have a server that is running the proxy and MTA services, and you may have another server on the backend running the mailboxd and the LDAP services. You can also have different virtual servers for each environment. For example, you might have a virtual server that is running a proxy, a virtual server that is running the MTA, a virtual server that is running LDAP, and a virtual server that is running the mailbox service.</p>
+</div>
+<div class="sect3">
+<h4 id="_ldap">LDAP</h4>
+<div class="paragraph">
+<p>This is the heart of the Zimbra architecture based on the open source project OpenLDAP&#174;. Every implementation of Zimbra must have the Zimbra LDAP instance.</p>
+</div>
+<div class="paragraph">
+<p>The LDAP service holds all of the configuration information needed to run the Zimbra environment. There is account information in the LDAP database that includes the username, password, and all other attributes associated with that account, including the mailbox server that the account resides on, the preferences for each user, etc. Zimbra can also integrate with other directories for wider network requirements or external lookups.</p>
+</div>
+<div class="paragraph">
+<p>LDAP also stores the domain information. With each email domain that you create in Zimbra, there is specific configuration information included, such as how does authentication occur for this domain; where does the global address list reside for this domain; and Class of Service information, where you can group users by features.</p>
+</div>
+<div class="paragraph">
+<p>LDAP can also look up email delivery addresses both from internal and external LDAP servers as well. Zimbra supports the proxying of user login and Global Address List (GAL) access to an existing enterprise directory such as Microsoft Active Directory or other LDAP-compliant directories. The ideal configuration seems to be store Zimbra specific configuration data within the Zimbra managed, embedded OpenLDAP and store independent enterprise configuration data within the existing enterprise directory. To provide scalability and redundancy, the Master LDAP server can be horizontally scaled by deploying multiple replica servers or be configured in a multi-master replication mode.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mta">MTA</h4>
+<div class="paragraph">
+<p>The MTA service is responsible for receiving email from the internet and delivering it to mailboxes in the Zimbra environment. It also delivers email sent by Zimbra users out-bound or to other internal users. It serves in the Zimbra architecture as a relay point for archiving.</p>
+</div>
+<div class="paragraph">
+<p>Internally, Local Mail Transfer Protocol (LMTP) is used to route the emails to the appropriate Zimbra mailbox server. The Zimbra MTA server includes the following programs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Postfix MTA, for mail routing, mail relay, and attachment blocking</p>
+</li>
+<li>
+<p>ClamAV - Anti-Virus engine</p>
+</li>
+<li>
+<p>SpamAssassin - Spam filters</p>
+</li>
+<li>
+<p>Amavis - interface between Postfix and ClamAV/SpamAssassin</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the Zimbra configuration, mail transfer and delivery are distinct functions. Postfix primarily acts as a Mail Transfer Agent (MTA) and the Zimbra mail server acts as a Mail Delivery agent (MDA).</p>
+</div>
+<div class="paragraph">
+<p>Most SME/SMB or larger enterprises will require a 3rd party AS/AV solution that is more enterprise grade or carrier grade. The Zimbra AS/AV is turned off or only some of the features are used. SpamAssassin is an open source project and does not have the fine grained administration features for better control and flexibility.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As the user base grows and domains become popular, the environments is more susceptible to spammers. An enterprise or carrier grade solution becomes mandatory.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mailboxd">Mailboxd</h4>
+<div class="paragraph">
+<p>The mailboxd process is where all the hard work is done. It controls everything from presenting the web client to users, so they see their mailbox data, to responding to other mail client requests for POP and IMAP and delivering the mail to those environments. It is responsible for storing messages on disk and providing indexing for those messages. It also maintains the MariaDB database that has the information for calendar, contacts, and tasks.</p>
+</div>
+<div class="paragraph">
+<p>One of the differences post the Zimbra 8.5 architecture is that we split out the mailboxd process. You now have the option of running static content separately from dynamic content. There is a mailboxd user interface node option in addition to the traditional mailboxd process, which includes the message store, the database information, and the indexing information. This is optional. You do not have to split out these two components.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_proxy">Proxy</h4>
+<div class="paragraph">
+<p>The Zimbra Proxy is a high performance POP/IMAP/HTTP proxy server that allows end users to access their Zimbra account using end clients such as Chrome/Firefox/IE/Safari, Microsoft Outlook (Windows and Mac), Mozilla Thunderbird, or other POP/IMAP end client software.</p>
+</div>
+<div class="paragraph">
+<p>Traditionally, we separate what is exposed to the internet and what is behind a firewall. The proxy server and the MTA server traditionally live in what is known as the DMZ or demilitarized zone, which is a security zone that is exposed to the internet. The proxy server listens for requests from the client and then translates across different ports, communicating with the mailboxd servers on the backend. This provides a layer of security on the backend. The proxy service is listening on the traditional protocols of HTTPS, IMAPS, and POP3S, which are secure ports 443, 995, and 993. It translates the incoming requests to different ports: the mailboxd process in not listening on port 443, it is listening on port 8443; it is not listening on port 993, it is listening on 7993; it is not listening on port 995, it is listening on port 7995. This becomes a layer of security, with the proxy service out front and the mailboxd processes separate.</p>
+</div>
+<div class="paragraph">
+<p>Proxying allows users to enter <em>imap.example.com</em> as their IMAP server, rather than remembering the actual mailbox server the user has been provisioned on. Encapsulation provides a layer of security and the proxy does a lookup to determine which backend mailbox server a user’s mailbox lives on and transparently proxies the connection from user’s client to the correct mailbox server.</p>
+</div>
+<div class="paragraph">
+<p>In addition to IMAP/POP3 proxying, the Zimbra proxy package based on NGINX is also able to reverse proxy HTTP requests to the right backend server. Using an Nginx based reverse proxy for HTTP helps to hide names of backend mailbox servers from end users. For example, users can always use their web browser to visit the proxy server at <a href="https://mail.example.com" class="bare">https://mail.example.com</a>. The connection from users’ whose mailboxes live on mbs1.example.com is proxied to mbs1.example.com by the proxy running on the mail.example.com server. Clients such as REST and CalDAV clients, Zimbra Connector for Outlook, and Zimbra Mobile Sync devices are all supported by the Zimbra Proxy.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_client_access">Client Access</h3>
+<div class="paragraph">
+<p>Zimbra features compatibility with Microsoft Outlook (both Windows and Mac), Apple Desktop applications, and all other standards based POP/IMAP/iCal/CalDAV/CardDAV clients. Our broad desktop compatibility gives end-users freedom of choice and administrators the ability to protect their desktop investments because mixed PC, Mac, and Linux desktop deployments can all talk to the same Zimbra Server. The <a href="#flow_arch">mail flow</a> diagram below shows some of the more common methods of access and indicates the protocols used to interact with the Zimbra Mailstore.</p>
+</div>
+<div class="paragraph">
+<p>The Zimbra Connector for Outlook (ZCO) provides real time two-way synchronization of mail, contacts, tasks, and calendar between Outlook and the ZCS server. Outlook for Mac works similarly using the EWS (Exchange Web Services) interface with the ZCS server. Standards-Based clients such as Mozilla Thunderbird, Sunbird, and Eudora can be used with Zimbra to access email and even calendar data because the Zimbra Server uses an all standards-based approach and supports POP, IMAP, iCal, CalDAV, RSS, etc.</p>
+</div>
+<div id="flow_arch" class="imageblock">
+<div class="content">
+<img src="images/mail_flow.jpg" alt="Mail Flow" width="800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mobile_access">Mobile Access</h4>
+<div class="paragraph">
+<p>Zimbra Mobile for smartphones enables two-way, over-the-air synchronization of mail, contacts, calendar and tasks data between the mobile device and the Zimbra Server. It features push email, which sends messages in real time to your device when it arrives on the Zimbra Server. Supported devices must be ActiveSync compatible, for example Apple iPhones, Android smartphones from Samsung, HTC, etc.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra’s mobile access is further enhanced via its Mobile Web Client.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Mobile Web Browsers - All devices with HTML capable browsers, have real time access to the Zimbra Server using our Mobile Web Client. Zimbra’s Mobile Web Client allows users access to their email, contacts, and calendar. This provides on-the-go access to the Zimbra experience to virtually all end-users.</p>
+</li>
+<li>
+<p>Responsive Design – Zimbra web client adapts itself to the device being used. Tablets have a new layout based on the Sencha framework and the smaller mobile browsers use an xHTML format.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mail_flowin_a_multi_server_configuration">Mail Flow in a Multi-Server Configuration</h4>
+<div class="paragraph">
+<p>The configuration for each deployment is dependent on numerous variables such as the number of mailboxes, mailbox quotas, performance requirements, existing network infrastructure, IT policies, security methodologies, spam filtering requirements, and more. In general, deployments share common characteristics for incoming traffic and user connectivity, as depicted in the following diagram. Alternate methods for configuring numerous points within the network are also possible.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/mailflow.png" alt="Mail Flow" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The numbered sequences are described below:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Inbound Internet mail goes through a firewall and load balancing to the edge MTA for spam filtering.</p>
+</li>
+<li>
+<p>The filtered mail then goes through a second load balancer.</p>
+</li>
+<li>
+<p>An external user connecting to the messaging server also goes through a firewall to the second load balancer.</p>
+</li>
+<li>
+<p>The inbound Internet mail goes to any of the Zimbra Collaboration MTA servers and goes through spam and virus filtering.</p>
+</li>
+<li>
+<p>The designated Zimbra Collaboration MTA server looks up the addressee’s directory information from the Zimbra Collaboration LDAP replica server.</p>
+</li>
+<li>
+<p>After obtaining the user’s information from the Zimbra Collaboration LDPA server, the MTA server sends the mail to the appropriate Zimbra Collaboration server.</p>
+</li>
+<li>
+<p>Internal end-user connections are made directly to any Zimbra Collaboration server that then obtains the user’s directory information from Zimbra Collaboration LDAP and redirects the user, as needed.</p>
+</li>
+<li>
+<p>The backups from the Zimbra Collaboration servers can be processed to a mounted disk.</p>
+</li>
+</ol>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="architecture">Zimbra Architecture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This diagram represents the Zimbra architecture.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ports_arch.png" alt="Client Server Flow Architecture">
+</div>
+</div>
+<div class="paragraph">
+<p>The mailbox server is running Jetty, the Java Virtual Machine, and this is the service node for the mailboxd architecture. On the backend, it is handling everything from storing the messages on disk to all of the other functions shown.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra was built around SOAP requests: the browser clients issue a SOAP request to the mailboxd process to retrieve information and that information is delivered back to the browser client.</p>
+</div>
+<div class="sect2">
+<h3 id="_message_and_file_store">Message and File Store</h3>
+<div class="paragraph">
+<p>Zimbra stores messages on disk. Messages are stored in the <strong>RFC 822</strong> format. If you have access as a system administrator, you can go to /opt/zimbra/store directory and drill down to look at the actual messages stored in MIME format on disk. A benefit of this storage architecture is that LINUX does single-instance storage: if I send a message to 3 different people, and we all share the same mailbox server, then there is only one instance of that mail item in the store. LINUX maintains multiple points to that mail item.</p>
+</div>
+<div class="paragraph">
+<p>The data store is a MySQL database where internal mailbox IDs are linked with user accounts. The data store maps the mailbox IDs to users’ OpenLDAP accounts. This database contains each user’s set of tag definitions, folders, calendar schedules and contacts, as well as the status of each mail message - read, unread, tags associated to message, and folder the message resides in. Index and search technology is provided through Lucene and index files are maintained for each individual mailbox.</p>
+</div>
+<div class="paragraph">
+<p>The other enhancement in the Zimbra 8 series is that the storage system can be a different type of file system, such as a global file system like Scality or EMC. Many Zimbra customers implement Zimbra over object store, so the message blobs are stored on a global array across multiple spindles and multiple pieces of hardware. It provides more redundancy and availability for the message store.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/store_link.png" alt="Message Store Directory Layout" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The Zimbra message (or blob) store is built on the underlying Unix/Linux file system. The mapping is one file per message, we actually write the RFC822 MIME message representation directly to a file. This has a number of benefits:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Once written, messages are immutable in Zimbra, and file systems are very efficient at storing and retrieving immutable unstructured/semi-structured blocks of data.</p>
+</li>
+<li>
+<p>Garbage collection is provided natively by the operating system, which offers both greater efficiency and lower administrative overhead.</p>
+</li>
+<li>
+<p>Independent utilities, tools, and scripts can easily recognize and process the Zimbra message representation on disk.</p>
+</li>
+<li>
+<p>Native operating system capabilities such as indexing/search (e.g., Mac Spotlight), compression, and security.</p>
+</li>
+<li>
+<p>Multi-level caching. Zimbra caches data itself, but Zimbra also benefits from the underlying operating system caching. Since enterprise messaging systems are generally gated on read and write performance, effective caching is one of the critical foundations of a scalable messaging implementation.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For each instance of the Zimbra mailbox server (one instance per machine), we store one copy of each message including all its attachments, even if that message is destined for multiple mailboxes. This obviously can lead to substantial savings in disk if large attachments are often sent to multiple recipients on a server (some messaging servers only provide single copy per mailbox or single copy per storage group, which can lead to significant redundancy in more expensive managed storage with no improvement in availability/fault tolerance). For operating systems that support them, we utilize hard links to the single copy to efficiently ensure that a file is garbage collected after all users have deleted it from their mailbox metadata.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metadata_sql_store">Metadata SQL Store</h3>
+<div class="paragraph">
+<p>While messages themselves are immutable, the meta-data associated with a message goes through frequent state changes as it is used. Message meta-data includes such items as</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What folder is the message in?</p>
+</li>
+<li>
+<p>What tags does the message have?</p>
+</li>
+<li>
+<p>Is the message read or unread?</p>
+</li>
+<li>
+<p>What conversation is the message part of?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We are storing the header information of every message. When you go into the web client and open your mailbox, you see the header information (who the message is from, when it was received, etc.). That is all meta data stored in the MariaDB database. When you click on the message to display it, Zimbra reads the message from the storage system.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra includes this MariaDB database for managing mailbox meta-data, and it is shipped within each Zimbra distribution. We choose to use a relational database for Zimbra meta-data because:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>We sought to leverage the hardening and performance investment of smart engineers before us. For efficient searching and reliably updating highly structured meta-data, it is hard to beat relational databases.</p>
+</li>
+<li>
+<p>Caching - Unlike immutable messages, Zimbra’s meta-data is both frequently read and written. Relational databases provide very efficient caching for both reads and writes. Update caching efficiency comes out of combining multiple updates, even those spanning transactions, into a single disk write (this optimization, of course, leverages the database’s sequentially-written transaction log to ensure that no changes are lost in the event of an outage).</p>
+</li>
+<li>
+<p>The SQL interface provides the Zimbra Community with investment protection in that the ZCS mailbox server could be very easily ported to other relational databases from the MySQL implementation that is currently included in ZCS.</p>
+</li>
+<li>
+<p>Database Reliability: Every transaction that occurs in Zimbra is stored in the Zimbra redo log. That includes everything from receiving a message in your inbox, reading that message, moving that message to another folder, deleting the message, adding a calendar appointment, adding a new address book, etc. All of these things are transactions, and all transactions are stored in the Zimbra redo log, which is handled by the mailboxd process.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_search">Search</h3>
+<div class="paragraph">
+<p>When a message comes into Zimbra, that message is indexed with the Lucene indexing process. This provides the basis for the very fast search in Zimbra, including the ability to search across multiple criteria.</p>
+</div>
+<div class="paragraph">
+<p>Search is fundamental to the Zimbra. Zimbra users do need to rely on complicated folder hierarchies to organize their emails because Zimbra users can search almost anything instantaneously across any folders. This enables usability advantages as users can archive emails into a single folder. All the meta-data associated with a message (folder, read/unread, tags, etc.) is available as search criteria, as are indexes into the content of the messages and the content of any attachments to the messages. Zimbra provides a simple, yet rich grammar for specifying searches, and then offers a graphical search builder for constructing advanced searches without having to learn that grammar.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra search is conducted on the server side. The advantages of server-side search are access to full mailboxes (including
+archived content), reliance on faster disk/CPU for increased performance (even factoring in the network latency), and the elimination of a substantial amount of redundant computation associated with indexing attachments sent to multiple recipients.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra leverages Apache Lucene to manage the index that enables fast searching, and Zimbra uses third-party software from Verity to extract text from attachments for indexing within Lucene.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lucene_index">Lucene Index</h3>
+<div class="paragraph">
+<p>Lucene is a high-performance, full-text search engine from Apache.  Lucene works by generating a full “segment” index for all words/tokens in a particular message, and optionally, its attachments. This segment is then merged into the receiving users’ existing index (one index per user). The index itself is represented in flat files. Search simply traverses these optimized file structures, often in parallel.</p>
+</div>
+<div class="paragraph">
+<p>Search is very fast—users perceive it to be nearly instantaneous. The pre-processing required to construct an index, on the other hand, grows linearly with the size of the text. Attachments tend to be the overriding factor in this overhead. Attachment indexing is a function of user’s class of service, and so can be turned on or off based on server scaling requirements. Message text indexing is more essential to the user experience (as well as significantly lower-overhead due to the smaller datasets)—it is a big part of the reason why many Zimbra users become comfortable with dropping their complex, time-intensive folder hierarchies in favor of a single “Stash” folder, because powerful search frees them from the worry that they will not be able to find what they are looking for.</p>
+</div>
+<div class="paragraph">
+<p>We have found this Lucene index to typically be about 20% of the size of the text being indexed. Simply by compressing messages and their attachments prior to storage, we can make up the space required to store the Lucene index. As a user’s index grows larger, the savings increase, since there is greater reuse of tokens. Garbage collection is done on the indices only after expunging messages (emptying the trash), so that trashed messages can still be found (many Zimbra users choose to use their trash as a secondary archive folder, since no message data need be expunged from the trash until the user’s quota is reached). Should a more catastrophic failure lead to an index corruption; there is also an administrative interface for regenerating Lucene indices (which are, of course, idempotent).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_other_services_and_access_methods">Other Services and Access Methods</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Attachment Index &amp; View</strong>: With the Zimbra Network Edition, and you have attachment indexing and view capabilities turned on, and that process is being provided by the mailboxd process. Convertd is the pricess wiht the attachment index and viewing capability. If I send you an email with a PowerPoint presentation, the Autonomy Keyview process adds the attachment to your search index, so you can perform an email search that also searches the attachment.</p>
+</li>
+<li>
+<p><strong>Free/Busy Providers</strong>: The last process that is being handled by the mailboxd process is the integration with free/busy providers. If you are migrating from MIcrosoft Exchange to the Zimbra platform, and you have some users on the legacy system and others on the new Zimbra system, and you want them to be able to update calendar information in both directions, that service would be provided by the free/busy provider within the mailboxd architecture.</p>
+</li>
+<li>
+<p><strong>Lite Browser Clients</strong>: It is possible to use Zimbra in HTML mode, where the information is displayed in HTML. The AJAX client, built on the AJAX framework, provides drag-and-drop functionality and other things that users are accustomed to in the browser.</p>
+</li>
+<li>
+<p><strong>Desktop Clients</strong>: We have the Zimbra Desktop. We also have Microsoft Outlook, which connects to the Zimbra environment over POP or IMAP. You can also install the Zimbra Connector for Outlook. This is part of the Network Edition of Zimbra. The Zimbra Connector for Outlook provides the integrated functionality of calendar, contacts, and tasks from within Outlook, which makes Outlook think that it is talking to an Exchange server. When Outlook communicates with an Exchange server, it is using the MAPI protocol. The MAPI protocol is a Microsoft API. Zimbra does not listen on that API, so we have to translate those requests from MAPI commands to SOAP commands over HTTPS.<br></p>
+<div class="paragraph">
+<p>We also have the ability for other clients like Thunderbird, the Apple mail client, or the Apple calendar to communicate with the Zimbra mailboxd process. We can do this over CardDAV or CalDAV or POP or IMAP.</p>
+</div>
+</li>
+<li>
+<p>Zimlets: Zimbra provides the ability to extend the web browser interface to integrate services from external web service providers. One Zimlet example is the Yahoo Finance Zimlet, which you can use to present a stock ticker in Zimbra that updates every 20 minutes. That information is coming from an external web service. From a security stand point, it is not recommended to present information in a client from across domains. The mailboxd process has something called the Zimlet web service proxy. When the browser running the Zimlet needs to update stock quotes, the request is made to the mailboxd process, the mailboxd process goes to the Internet and pulls that information from the external web service, and then delivers it back to the browser client. You can extend this to any external web service. If you are a manufacturing organization and you need to see order information displayed in email clients dynamically, you can write a Zimlet that goes out and pulls that information from your ordering management system and presents the information in the browser client without the user having to log into a separate system.<br></p>
+<div class="paragraph">
+<p>We also have the ability to create Zimlet JSP tags that communicate information back to the browser via the mailboxd interface.
+The other point to make is that when users of the desktop clients and browser clients send email, they connect to the mailbox server, they compose email in the client, and then they click send. The mailboxd process forwards that information to the postfix MTA service where antispam and antivirus is performed, and then it is forwarded to the endpoint.</p>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_high_availability_and_scalability">High Availability and Scalability</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_high_availability">High Availability</h3>
+<div class="paragraph">
+<p>Single points of failure should be avoided wherever possible, at all levels: network, server, power supply, cabling, disk drives and software elements.  This should apply to ancillary systems (e.g. DNS and External Authentication Servers) as well as to the email servers themselves.</p>
+</div>
+<div class="sect3">
+<h4 id="_ldap_master">LDAP Master</h4>
+<div class="paragraph">
+<p>The LDAP Master will have its database stored on the servers’ local disks. Redundancy is provided via the deployment of LDAP Replica servers. The replicas contain a full copy the master database and in the event of failure of the master server the replica can be promoted to master status and the service can continue. Adding replicas also facilitates the distribution of load on the LDAP services; balancing the load across the master and replicas is configured internally within the ZCS configuration. Zimbra also supports a Multi-Master mode where there can be more than one master LDAP server eliminating the need for replica servers.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mailstore">Mailstore</h4>
+<div class="paragraph">
+<p>Zimbra is designed to be deployed in a virtual environment. VMware, KVM are the popular VI environments supported. Zimbra works best with VMware vSphere and can leverage vSphere HA for the mailstore high-availability. Active-Active configuration is not supported today. Zimbra can also work with traditional OS clustering (RedHat) but there is no application level failover supported and this works best for a hardware failure.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mta_and_proxy">MTA and Proxy</h4>
+<div class="paragraph">
+<p>Both the MTA and Proxy servers are stateless services and can run in an Active-Active mode behind a load-balancer.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_scalability">Scalability</h3>
+<div class="paragraph">
+<p>Zimbra was designed from the ground up to scale to meet the needs of businesses with 100,000s of users and Service Providers with millions and even tens of millions of users. The Zimbra architecture inherits from distributed systems expertise that was gleaned building messaging systems that today host more than 100 million mailboxes world-wide and Java/Web systems that have thousands of production server CPUs within single large-scale deployments.</p>
+</div>
+<div class="paragraph">
+<p>All medium and large Zimbra deployments are horizontally partitioned across servers (and the attached storage) by end-user mailboxes. An end-user&#8217;s mailbox includes his or her messages, calendar(s), address book(s), documents, and so on, which are all collocated for very efficient context switching and search across applications. So ZCS servers are inherently stateful - each serves as the primary home for a subset of the aggregate mailboxes. This requires that each ZCS server have the smarts to reroute a protocol request (via XML/SOAP/HTTP/S, IMAP/S, POP/S, RSS, iCal, etc.) to the appropriate primary server in the event that an in-bound load balancer makes the wrong decision.</p>
+</div>
+<div class="paragraph">
+<p>Automated replication and failover is also essential for large-scale deployments. For example, LDAP configuration data (which includes end-user mailbox home locations) can be fully replicated/partitioned across as many replica servers as are required to meet performance and availability requirements. LDAP replicas may be collocated with ZCS mailbox servers, MTAs, or “vertically partitioned” to dedicated servers.</p>
+</div>
+<div class="paragraph">
+<p>Mailbox data, on the other hand, can be transparently replicated within the underlying storage system (such as by using RAID or mirroring) for availability only. (It simply does not make sense to replicate mailboxes for scalability, given how frequently state data is updated, and the overhead of ensuring transactional consistency between multiple mailbox copies.) Clustering technology is used to automatically failover from the primary server to a preconfigured secondary (or tertiary) server, which then assumes the role of primary for that mailbox. (I/O fencing and associated technologies ensure that the former primary no longer has “write” access to the mailbox in order to avoid “split-brained syndrome”).</p>
+</div>
+<div class="paragraph">
+<p>ZCS Meta-data optimization &amp; partitioning; Meta-data for a mailbox is generally all of the data required for navigating to the appropriate message or meeting. Zimbra meta-data includes ZCS&#8217;s very efficient, Lucene based index into all the text contained in every message, meeting, contact, document, attachment, and so on. Zimbra meta-data also includes the structured meta-data that captures folders, tags, dates, read/unread status, etc. Zimbra uses an off-the-shelf SQL database for optimizing structured meta-data queries and updates.</p>
+</div>
+<div class="paragraph">
+<p>Meta-data is horizontally partitioned by user into the appropriate ZCS mailbox server, but the key additional insight is that this meta-data can also be partitioned from the target data (message body, meeting, document) to ensure very efficient search, UI painting, and so on. Separating the meta-data and target-data makes it far more cost-effective to keep the meta-data on fast disk, allowing sophisticated search and navigation to be nearly instantaneous even across multi-gigabyte mailboxes. Latency in access to the message body itself (which could, for example, reside in an HSM system) is not nearly as problematic to the user experience as latency or inefficiency in accessing the meta-data. Partitioned meta-data also allows potentially expensive operations such as compliance-related cross-mailbox discovery to be handled efficiently (via simply composing the appropriate horizontally partitioned search results).</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_proposed_project_approach">Proposed Project Approach</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section details how Zimbra professional services handle a project to ensure a smooth transition from the existing legacy platform to full Zimbra Collaboration Suite. This section serves as a guideline only and the approach needs to be modified and made suitable as per the customers requirements. Here are some of the processes and phases mentioned.</p>
+</div>
+<div class="sect2">
+<h3 id="_assessment_and_solution_design">Assessment and Solution Design</h3>
+<div class="paragraph">
+<p>Site assessment and auditing means identifying the current infrastructure and business goals of the customer. This includes getting information about the current platform topology like hardware/storage/network capabilities, service SLA&#8217;s, getting information on the current issues, etc.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Review the current environment and examine all the business and technical issues.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Get more information on the server, storage and network infrastructure</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Formulate problem definitions and document the objectives.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Solution design and service planning will include development of the Baseline Architecture, Low-Level Design (“LLD”), hardware Bill-of-Materials (“BOM”) and development of customizations and documentation for all of the above.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Develop an understanding of the customer’s existing architecture and technical challenges or issues.</p>
+</li>
+<li>
+<p>Document the project requirements, phases and communication plans with the customer’s product and technical staff</p>
+</li>
+<li>
+<p>Create a project definition including roles, dependencies, schedule estimates, communication plans, etc.</p>
+</li>
+<li>
+<p>Create an integrated application architecture that is both flexible and scalable.</p>
+</li>
+<li>
+<p>Present a solution design methodology that is agile.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_zimbra_deployment_and_configuration">Zimbra Deployment and Configuration</h3>
+<div class="paragraph">
+<p>This phase will involve the actual deployment of all the different Zimbra components like LDAP, MTA, Mailbox services based on solution design.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Execute the project according to the documented and approved requirements and specifications.</p>
+</li>
+<li>
+<p>After installation, configure the platform as per the design</p>
+</li>
+<li>
+<p>Integrate with existing gateway services, anti-spam, antivirus and other 3rd party dependencies etc.</p>
+</li>
+<li>
+<p>Configuration of the dependencies and the Zimbra platform as per the requirements</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A good resource for deployment can be found here - <a href="https://wiki.zimbra.com/wiki/Performance_Tuning_Guidelines_for_Large_Deployments">Performance Tuning</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_testing">Testing</h3>
+<div class="paragraph">
+<p>Based on the requirements, a functional test case document needs to be ready for this phase. An UAT or functional testing ensures that there are no bugs/issues with the platform for regular day-to-day use and the customer has all their challenges addressed before the environment is made production ready. Testing may include the use of in-house or third party tools and the level of testing always depends on the customer requirements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Perform testing and quality assurance via functional, performance, and end-to-end testing.</p>
+</li>
+<li>
+<p>Manage or assist with any pilot/user acceptance testing.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_migration">Migration</h3>
+<div class="paragraph">
+<p>Migration is most critical part of any mail service.  Once all the required functional testing has been performed, its time to migrate the data from old legacy platform to Zimbra platform.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra professional services can help with the design, planning, scripting, and/or testing of migration of all legacy data ( email, calendars, contacts, filters, etc) to the new Zimbra platform. Zimbra services can help design the best-suited migration approach for the customer based on inputs on the current setup and migration plans and also help develop the migration methods based on the migration plan, which may include migration via all-at-once/big-bang or incremental, split-domain methods. Zimbra services will also develop the necessary scripts to carry out migration and run the tools for a subset of users. Customer will run remaining subset when they gain enough knowledge and understanding.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Zimbra Professional Services is not a bundled offering and is a separate paid service offering.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_audit_and_operations">Audit and Operations</h3>
+<div class="paragraph">
+<p>The goal of this phase is to deliver an operational support model that will streamline production operations, provide proactive issue detection, and provide overall service excellence. Once the environment is live, there must be a process of regular auditing of the environment and its configurations to ensure that the system has been tuned for optimum performance. All fo the Zimbra statistical information is collected by the "stat" process and logged. This data can be analyzed further and decisions can be made on how to improve the system performance.</p>
+</div>
+<div class="paragraph">
+<p>Refer to this <a href="https://wiki.zimbra.com/wiki/ZCS_Operational_Best_Practices_-_Scope">ZCS Best Practices reference guide</a> for more information.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="zimbra_ports">Appendix A: ZCS Firewall Ports</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_inside_firewall_ports">Inside Firewall Ports</h3>
+<table class="tableblock frame-all grid-rows stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Port</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSH for Remote Server logs/Management</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">25</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMTP to MTA from internal AS/AV service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">389</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MTA to LDAP Authentication</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">514</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(r)syslogd from ZCS servers to Logger (TCP/UDP)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7025</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LMTP from MTA&#8217;s to Mailbox Servers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7071</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Administration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7072</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Route Lookups</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7110</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pop Proxy to Mailbox Servers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7143</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMAP Proxy to Mailbox Servers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7993</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMAP Proxy to Mailbox Servers (SSL)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7995</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POP Proxy to Mailbox Servers (SSL)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Proxy to Mailbox Server</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8443</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Proxy to Mailbox Server if using SSL at Proxy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8443</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mailbox Server to Zimbra Docs (both ways for HTTPS backend)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9091</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">incoming traffic from all mailbox and proxy servers to Docs Server Extension</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9071</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zimbra Administration if using Admin Web Interface through Proxy</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_outside_firewall_ports">Outside Firewall Ports</h3>
+<table class="tableblock frame-all grid-rows stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Port</th>
+<th class="tableblock halign-left valign-top">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">25</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMTP to Internal AS/AV from external mail servers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">80</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connect to Zimbra Mail (if SSL offloaded by Load Balancer)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">110</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POP to Proxy server (if SSL offloaded)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">143</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMAP to Proxy Server (if SSL offloaded)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">465</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMTPS to Internal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">587</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Submission Email using TLS over SMTP</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">443</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connect to Zimbra Mail over HTTPS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">993</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMAP SSL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">995</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POP SSL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5222</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XMPP (TLS) - Direct to Mailbox required</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="TALK">Appendix B: Zimbra Talk V2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Zimbra Talk V2 is the newest addition to the Zimbra product line-up. Zimbra Talk V2 will be available in version 8.8.8 onwards.
+This is enterprise-level messaging and videoconferencing built inside the Zimbra web client. It includes one-on-one and group messaging and videoconferencing, along with full screen and file sharing capabilities.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra Talk V2 inherits some of the features from the previous Zimbra Chat, but the vast majority of the features are new. Some of the inherited features from Chat are (basic features):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>1-to-1 text messaging</strong></p>
+</li>
+<li>
+<p><strong>Buddy List Management</strong></p>
+</li>
+<li>
+<p><strong>Chat history</strong></p>
+</li>
+<li>
+<p><strong>Emojis</strong></p>
+</li>
+<li>
+<p><strong>Status or presence management</strong></p>
+</li>
+<li>
+<p><strong>User preferences</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Zimbra Talk V2 provides advanced features. These features are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Message Delivery and Read Awareness.</strong> Check marks show delivery or read status</p>
+</li>
+<li>
+<p><strong>Group Messaging.</strong> Secure and private messaging for small groups (up to 5 people)</p>
+</li>
+<li>
+<p><strong>Videoconferencing.</strong> WebRTC based video, out-of-the-box without any plug-in</p>
+</li>
+<li>
+<p><strong>Corporate Communications.</strong> Spaces and Channels for private or organization-wide communications</p>
+</li>
+<li>
+<p><strong>File Sharing</strong></p>
+</li>
+<li>
+<p><strong>Screen Sharing</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Beginning in Zimbra Collaboration Network Edition 8.8.8, the Zimbra Talk Zimlet will provide the basic chat features, these features will be available for all of your users. In order to enable the advanced chat and videoconferencing features per user, a purcharse of Zimbra Talk V2 license is needed.</p>
+</div>
+<div class="paragraph">
+<p>Zimbra Talk V2 has two user interfaces: <strong>Chat Panel and Zimbra Talk tab</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>Chat Panel</strong> is available to all users - basic and advanced - for text messaging. Advanced users will have the additional options of videoconferencing and file sharing in the panel.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/panel_chat.png" alt="Chat Panel" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The <strong>Zimbra Talk</strong> tab is only available for advanced Zimbra Talk users. This tab offers all of the corporate instant messaging features such as Spaces and Channels.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/talk_tab.png" alt="Chat Panel" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Advanced Zimbra Talk users will have three options to interact with other users: Groups, Spaces, and Channel.</p>
+</div>
+<div class="paragraph">
+<p><strong>Groups</strong></p>
+</div>
+<div class="paragraph">
+<p>Groups are the basic way of communicating with multiple people at the same time (up to 5 total). Those are non-persistent entities that are not tied to any specific space: any user can create a group inviting people from their Buddy List and any group member can invite more people in the same way. When all users leave a group, the group itself ceases to exist.</p>
+</div>
+<div class="paragraph">
+<p><strong>Groups Features</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A user in a Group can add more users to the Group itself up to the allowed limit</p>
+</li>
+<li>
+<p>A user in a Group can chat with all of the others. Messages sent in a Group are viewed by all members of that Group</p>
+</li>
+<li>
+<p>A user in a Group can send files to all of the others. Files sent in a Group are available to all members of that Group</p>
+</li>
+<li>
+<p>A user in a Group can start a videoconference with all of the others. Group videoconferences can be joined at any time by all members of the Group</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Spaces</strong></p>
+</div>
+<div class="paragraph">
+<p>Spaces are a themed container that can hold any number of Channels. A Space is a community portal where people gather to discuss different topics in dedicated areas (named Channels).</p>
+</div>
+<div class="paragraph">
+<p><strong>Spaces Features</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each space has a unique name and topic. The name cannot be changed after creating the space but the Topic can be edited</p>
+</li>
+<li>
+<p>Users in a space can send an email to all members of that space</p>
+</li>
+<li>
+<p>Members can leave a space at any time</p>
+</li>
+<li>
+<p>Members can create new channels and invite new people to the space</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Channels</strong></p>
+</div>
+<div class="paragraph">
+<p>Channels are topic-defined areas inside of a same space. Those can contain any number of users, and unlike groups, users are able to autonomously join any Channel in a Space they are in instead of being invited to it by a member.</p>
+</div>
+<div class="paragraph">
+<p><strong>Channels Features</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A user in a Channel can chat with all of the others</p>
+</li>
+<li>
+<p>A user in a Channel can send files to all of the others</p>
+</li>
+<li>
+<p>A user in a Channel can start a videoconference with all of the others</p>
+</li>
+<li>
+<p>Channel videoconferences can be joined at any time by all members of the Channel</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Videoconferencing</strong></p>
+</div>
+<div class="paragraph">
+<p>Videoconferencing features are available in both Groups and Channels, allowing multiple people to communicate in real-time using a webcam and a headset as well as allowing them to share their screen with all other attendees.</p>
+</div>
+<div class="paragraph">
+<p>This feature is based on the WebRTC protocol, a peer-to-peer auto-adaptive technology that allows clients to communicate directly without overloading the server and whose call quality is automatically tweaked based on the available bandwidth - with the maximum quality being Full HD for both video and audio. The first time a Videoconference is started, users will need to grant their browser access permissions to their camera and microphone.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/videoconference.png" alt="Videoconferencing" width="800">
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_license">License</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><span class="image"><img src="images/ccsa.png" alt="CC BY-SA"></span> Synacor, Inc., 2017</p>
+</div>
+<div class="paragraph">
+<p>&#169; 2017 by Synacor, Inc. Zimbra Collaboration Technical Overview</p>
+</div>
+<div class="paragraph">
+<p>Synacor, Inc., 2017<br>
+40 La Riviere Drive, Suite 300<br>
+Buffalo, New York 14202</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.synacor.com" class="bare">https://www.synacor.com</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-08-13 10:49:48 +08
+</div>
+</div>
+</body>
+</html>
