@@ -7,6 +7,35 @@ Zimbra includes complete email, contacts, calendar, file-sharing and tasks, and 
 
 image::images/Zimbra-chat-active.png[Zimbra]
 
+The Zimbra Collaboration architecture is built with well-known open source technologies and standards-based protocols. The architecture consists of client interfaces and server components that can run as a single node configuration or be deployed across multiple servers for high availability and increased scalability.
+
+The architecture includes the following core advantages:
+
+[cols="40,60",options="header",grid="rows"]
+|=======================================================================
+|Core Advantage |Components/Description
+
+|Open source integrations |
+Linux(R), Jetty, Postfix, MariaDB, OpenLDAP(R)
+
+|Industry-standard open protocols |
+SMTP, LMTP, SOAP, XML, IMAP, POP
+
+|Modern technology Design |
+HTML5, Javascript, XML, and Java
+
+|Scalability |
+Each Zimbra mailbox server includes its own mailbox accounts and associated
+message store and indexes. The Zimbra platform scales vertically (by adding
+more system resources) and horizontally (by adding more servers)
+
+|Browser-based client interface .2+.^|
+Easy, intuitive access to {product-name} features, using a standard
+web platform.
+
+|Browser-based Administration Console
+|=======================================================================
+
 == New Features with Zimbra
 === Next Generation Modules
 NG modules include Real-time Backup, Synchronization of Shared Resources, HSM on Amazon S3 and a new simplified Delegated Admin.

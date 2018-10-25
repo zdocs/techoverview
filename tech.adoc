@@ -1,14 +1,155 @@
 [[tech]]
 = Technical Overview
 
-Zimbra architecture consists of many components integrated using industry standard protocols. There are more than 80 different open source components in use and The architecture includes the following core advantages:
+Zimbra is an innovative messaging and collaboration application that offers the following state-of-the-art solutions that are accessed through the browser based web client.
 
-* *Open source integrations*: Linux(R), Jetty, Postfix, MariaDB(R), OpenLDAP(R), NGINX(R), etc.
-* *Uses industry standard open protocols*: SMTP, LMTP, SOAP, POP3, IMAP4, LDAP, HTTP
-* *Modern technology design*: Java, JavaScript, React
-* *Horizontal Scalability*: Each mailbox server includes its own data store, message store, and set mailbox accounts. You don’t change anything on existing servers to scale the system. To scale for additional mail accounts, add more servers.
-* *High Availability support*: High availability can be achieved in partnership with products like VMware vSphere.
-* *Browser-based* client and admin interface
+* Intuitive message management, search, tagging, and sharing.
+* Personal, external, and shared calendar.
+* Personal and shared Address Books and Distribution Lists.
+* Personal and Shared Task lists.
+
+== Zimbra Components
+
+Zimbra architecture includes open-source integrations using industry standard protocols. The third-party software listed in <<table_tps,Third-Party Software>> is bundled with Zimbra software and installed as part of the installation process. These components have been tested and configured to work with the software.
+
+[[table_tps]]
+.Third-Party Software
+[cols="25,75a",options="header",grid="rows"]
+|=======================================================================
+|3rd-Party Component | Description
+
+|Jetty |
+Web application server that runs Zimbra software.
+
+|Postfix |
+Open source mail transfer agent (MTA) that routes mail messages to the
+appropriate Zimbra server
+
+|Open LDAP software |
+Open source implementation of the Lightweight Directory Access Protocol
+(LDAP) that stores Zimbra system configuration, the Zimbra Global Address
+List, and provides user authentication. Zimbra can also work with GAL and
+authentication services provided by external LDAP directories such as
+Active Directory
+
+|MariaDB |
+Database software
+
+|Lucene |
+Open source full-featured text and search engine
+
+| |
+Third-party source that converts certain attachment file types to HTML
+
+|Anti-virus/anti-spam |
+Open source components that include:
+
+* ClamAV, an anti-virus scanner that protects against malicious files
+* SpamAssassin, a mail filter that attempts to identify spam
+* Amavisd-new interfaces between the MTA and one or more content checkers
+
+|Apache JSieve |
+Manages filters for email
+
+|LibreOffice |
+High fidelity document preview
+|=======================================================================
+
+== Zimbra Application Packages
+
+{product-name} provides the application packages listed in
+<<table_app_pkgs,Application Packages>>.
+
+[[table_app_pkgs]]
+.Application Packages
+[cols="25,75a",options="header",grid="rows"]
+|=======================================================================
+|Package |Description
+
+|Zimbra Core |
+The libraries, utilities, monitoring tools, and basic configuration
+files. `zmconfigd` is contained in the zimbra-core and is automatically
+enabled to run on all systems.
+
+|Zimbra Store |
+The components for the mailbox server (including Jetty). The Zimbra mailbox
+server includes the following components:
+
+* *Data store* -- A MariaDB database.
+
+* *Message store* -- Location of all email messages and file attachments.
+
+* *Index store* -- Index and search technology is provided through
+Lucene. Index files are maintained for each mailbox.
+
+* *Web application services* -- The Jetty web application server runs web
+applications (webapps) on any store server. It provides one or more web
+application services.
+
+|Zimbra LDAP |
+{product-name} uses the OpenLDAP(R) software, which is an open source LDAP
+directory server. User authentication, the Zimbra Global Address List, and
+configuration attributes are services provided through OpenLDAP. Note that
+the Zimbra GAL and authentication services can be provided by an external
+LDAP Directory such as Active Directory.
+
+|Zimbra MTA |
+Postfix is the open source mail transfer agent (MTA) that receives email
+via SMTP and routes each message to the appropriate Zimbra mailbox server
+using Local Mail Transfer Protocol (LMTP). The Zimbra MTA also includes the
+anti-virus and anti-spam components.
+
+|Zimbra Proxy |
+Zimbra Proxy is a high-performance reverse proxy service for passing
+IMAP[S]/POP[S]/HTTP[S] client requests to other internal {product-abbrev}
+services.This package is normally installed on the MTA server(s) or on its
+own independent server(s). When the zimbra-proxy package is installed, the
+proxy feature is enabled by default. Installing the Zimbra Proxy is highly
+recommended, and required if using a separate web application server.
+
+|Zimbra Memcached |
+Memcached is automatically selected when the zimbra-proxy is installed. At
+least one server must run zimbra-memcached when the proxy is in use. You
+can use a single memcached server with one or more Zimbra
+proxies. zimbra-memcached is required if using a separate web application
+server.
+
+|Zimbra SNMP (Optional)|
+If you choose to install zimbra-SNMP for monitoring, this package should be
+installed on every Zimbra server.
+
+|Zimbra Logger (Optional) |
+If used, this is installed on one mailbox server, and must be installed at
+the same time as the mailbox server.The Zimbra Logger installs tools for
+syslog aggregation and reporting. If you do not install Logger, the *server
+statistics* section of the Administration Console will not display.
+
+|Zimbra Spell (Optional) |
+Aspell is the open source spell checker used on the Zimbra Web Client. When
+Zimbra-Spell is installed, the Zimbra-Apache package is also installed.
+
+|Zimbra Apache |
+This package is installed automatically when Zimbra Spell or Zimbra
+Convertd is installed.
+
+|Zimbra Convertd |
+This package is installed on the zimbra-store server. Only one
+Zimbra-convertd package needs to be present in the {product-name}
+environment. The default is to install one zimbra-convertd on each
+zimbra-store server. When Zimbra-Convertd is installed, the Zimbra-Apache
+package is also installed.
+
+|Zimbra Archiving (Optional)|
+Archiving and Discovery offers the ability to store and search all messages
+delivered to, or sent by the {product-name} Server. This package includes
+the cross mailbox search function which can be used for both live and
+archive mailbox searches. Note: Using Archiving and Discovery can trigger
+additional mailbox license usage. To find out more about Zimbra Archiving
+and Discovery, contact Zimbra sales.
+
+|=======================================================================
+
+
 
 == Supported Operating Systems
 Zimbra Collaboration Network Edition v8.6.x, v8.7.x and later is supported on the following operating systems:
