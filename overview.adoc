@@ -16,7 +16,7 @@ The architecture includes the following core advantages:
 |Core Advantage |Components/Description
 
 |Open source integrations |
-Linux(R), Jetty, Postfix, MariaDB, OpenLDAP(R)
+Jetty, Postfix, MariaDB, OpenLDAP
 
 |Industry-standard open protocols |
 SMTP, LMTP, SOAP, XML, IMAP, POP
@@ -37,6 +37,10 @@ web platform.
 |=======================================================================
 
 == New Features with Zimbra
+
+=== Modern UI
+
+
 === Next Generation Modules
 NG modules include Real-time Backup, Synchronization of Shared Resources, HSM on Amazon S3 and a new simplified Delegated Admin.
 
@@ -82,10 +86,9 @@ Zimbra 8.8 has a new refactored IMAP service to run separately from all other Zi
 
 === Zimbra Connect
 Zimbra Connect replaces all versions of Chat and Talk. Zimbra Connect is available in Zimbra Network Edition 8.8.x and Zimbra 9.
-+
-Zimbra Connect Basic - Peer-to-peer chat using XMPP. Know your company’s chat data is secure and private while your users enjoy searching chat history, emoticons, etc.
-+
-Zimbra Connect Advanced - brings secure, high-quality chat and videoconferencing right into the Zimbra Web Client. Users can chat and videoconference 1:1 and in groups, share files, share their screen and so much more. Zimbra Talk V2 is licensed on a per-user basis, and is available in Network Edition only.
+
+* Zimbra Connect Basic - Peer-to-peer chat using XMPP. Know your company’s chat data is secure and private while your users enjoy searching chat history, emoticons, etc.
+* Zimbra Connect Advanced - brings secure, high-quality chat and videoconferencing right into the Zimbra Web Client. Users can chat and videoconference 1:1 and in groups, share files, share their screen and so much more. Zimbra Talk V2 is licensed on a per-user basis, and is available in Network Edition only.
 
 === Zimbra Drive (v2)
 Zimbra Drive offers an integrated file sync and share functionality built directly into Zimbra. Complete file sharing & storage system right in the Zimbra Web Client. Integrated with Zimbra Docs, Zimbra Drive is an alternative to the _Briefcase_.

@@ -1,4 +1,4 @@
-[HA]
+[[HA]]
 = High Availability and Scalability
 
 == High Availability

@@ -4,6 +4,10 @@ include::settings.adoc[]
 
 <<<
 
+toc::[]
+
+<<<
+
 include::overview.adoc[]
 
 <<<

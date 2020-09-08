@@ -229,7 +229,7 @@ The configuration for each deployment is dependent on numerous variables such as
 
 image::images/mailflow.png[Mail Flow, 800]
 
-The numbered sequences are described below:
+The
 
 1. Inbound Internet mail goes through a firewall and load balancing to the edge MTA for spam filtering.
 

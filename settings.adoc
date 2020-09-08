@@ -3,13 +3,16 @@
 :product: Zimbra
 :product-abbrev: ZCS
 = {product-name} {document-title}
+:toc: macro
+:toc-title: Table of Contents
 :toclevels: 2
 :icons: font
 :title-logo-image: images/zimbra.jpg
+:reproducible:
+:source-highlighter: highlight.js
+:listing-caption: Listing
 :showlinks:
-:source-highlighter: coderay
-:toc: left
 :experimental:
-:product-version: 8.8
-:product-release-date: Sep, 2017
-:copyright-year: 2017
+:product-version: 9.0
+:product-release-date: Sep, 2020
+:copyright-year: 2020

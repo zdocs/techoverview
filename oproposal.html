@@ -2679,7 +2679,7 @@ tr {
   break-after: page;
 }
 
-@page :right {
+@page :left {
   @bottom-right {
     content: counter(page);
     font-size: 0.8rem;
@@ -2693,7 +2693,7 @@ tr {
   }
 }
 
-@page :left {
+@page :right {
   @bottom-right {
     margin: 10pt 0 30pt 0;
     border-top: .1pt solid #d2d2d2;
@@ -2704,21 +2704,52 @@ tr {
     padding: 10pt 0 0 0;
     margin: 10pt 10pt 30pt 10pt;
     border-top: .1pt solid #d2d2d2;
+  }
+}
+
+@page :first {
+  @bottom-right {
+    margin: 0;
+    padding: 0;
+    border: none;
+    content: normal;
+  }
+  @bottom-left {
+    margin: 0;
+    padding: 0;
+    border: none;
+    content: normal;
   }
 }
 
 .pagedjs_page.pagedjs_first_page {
-  counter-increment: page 1;
+  counter-increment: page 0;
 }
 
+#toc {
+  break-before: page;
+}
+
+#preamble {
+  break-before: page;
+}
+
+.sect1 {
+  break-before: page;
+}
+
+#cover {
+  break-after: unset;
+}
 
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css"/>
+
 </head>
-<body class="article">
-<div class="title-document">
+<body class="book toc2 toc-left">
+<div id="cover" class="title-page">
   <h1>Zimbra Collaboration Technical Overview</h1>
+  <h2></h2>
 </div>
 <div style="display: none;"><ul class="sectlevel1">
 <li><a href="#overview">Zimbra Overview</a>
@@ -2777,13 +2808,8 @@ tr {
 </li>
 <li><a href="#_license">License</a></li>
 </ul></div>
-
-<div id="content" class="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="page-break" style="break-after: page;"></div>
-<div id="toc" class="toc">
-<div id="toctitle" class="title">Table of Contents</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#overview">Zimbra Overview</a>
 <ul class="sectlevel2">
@@ -2842,6 +2868,9 @@ tr {
 <li><a href="#_license">License</a></li>
 </ul>
 </div>
+<div id="content" class="content">
+<div id="preamble">
+<div class="sectionbody">
 <div class="page-break" style="break-after: page;"></div>
 </div>
 </div>
@@ -3474,7 +3503,7 @@ As the user base grows and domains become popular, the environments is more susc
 </div>
 </div>
 <div class="paragraph">
-<p>The</p>
+<p>The numbered sequences are described below:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -4358,8 +4387,6 @@ Buffalo, New York 14202</p>
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-<script>hljs.initHighlighting()</script>
 
 <script>
 /**

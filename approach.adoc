@@ -1,4 +1,4 @@
-[approach]
+[[approach]]
 = Proposed Project Approach
 This section details how Zimbra professional services handle a project to ensure a smooth transition from the existing legacy platform to full Zimbra Collaboration Suite. This section serves as a guideline only and the approach needs to be modified and made suitable as per the customers requirements. Here are some of the processes and phases mentioned.
 
