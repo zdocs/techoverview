@@ -152,14 +152,16 @@ and Discovery, contact Zimbra sales.
 == Supported Operating Systems
 Zimbra Collaboration Network Edition v8.6.x, v8.7.x and later is supported on the following operating systems:
 
-* Red Hat Enterprise Linux 7
-* CentOS Linux 7
-* Red Hat Enterprise Linux 6, patch level 4 or later is required
-* CentOS Linux 6, patch level 4 or later is required
+* Red Hat® Enterprise Linux® 8 (64-bit)
+* CentOS Linux® 8 (64-bit)
+* Red Hat® Enterprise Linux® 7 (64-bit)
+* CentOS Linux® 7 (64-bit)
+* Red Hat Enterprise Linux 6 (64-bit), patch level 4 or later is required
+* CentOS Linux 6 (64-bit), patch level 4 or later is required
 * Oracle Linux 7.2
 * Oracle Linux 6.6
-* Ubuntu 16.04 LTS
-* Ubuntu 14.04 LTS
+* Ubuntu 16.04 LTS Server Edition (64-bit)
+* Ubuntu 18.04 LTS Server Edition (64-bit), starting from Zimbra Collaboration 8.8.12 and above
 
 == Zimbra Components Overview
 Zimbra is designed to provide an end-to-end mail solution that is scalable and highly reliable. There are 4 major services in Zimbra described below. You can also have all of the services running on a single virtual server or they can be installed separately on multiple servers. If you have less than 1,000 users, it is very common to have only a single virtual server running all of the Zimbra processes.
