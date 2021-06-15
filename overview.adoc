@@ -39,7 +39,10 @@ web platform.
 == New Features with Zimbra
 
 === Modern UI
+Zimbra 9 introduces a modern, responsive user interface based on industry-leading React technology. Users can move seamlessly between desktop, mobile and tablet browsers while enjoying a consistent and easy-to-use email and collaboration experience. And just like you expect, you can customize the UI for your organization’s colors, fonts, logos and more.
 
+=== 3rd Party Integration. Extensibility
+Zimbra 9 is designed for extensibility and features best-in-class, out-of-the-box integrations with Slack, Dropbox, Google Drive, OneDrive and Zoom, with many more integrations underway. Zimbra is fully committed to creating a collaboration ecosystem that allows small businesses, enterprises and other organizations to utilize services they use day-to-day instead of being forced to use or pay for services they don’t use. Break free from the closed systems of Microsoft and Google and use the apps that you have already invested in.
 
 === Next Generation Modules
 NG modules include Real-time Backup, Synchronization of Shared Resources, HSM on Amazon S3 and a new simplified Delegated Admin.
