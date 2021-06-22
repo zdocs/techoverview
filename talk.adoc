@@ -2,7 +2,7 @@
 [[TALK]]
 = Zimbra Connect
 
-Zimbra Connect is chat and more, right in your Zimbra Web Client.  This is enterprise-level messaging and videoconferencing built inside the Zimbra web client. Zimbra Connect integrates a fully fledged corporate instant messaging platform inside the Zimbra WebClient, including Group and Corporate Messaging, File Sharing, Screen Sharing and informal Video Chat capabilities.
+Zimbra Connect is chat and more, right in your Zimbra Web Client. Zimbra Connect integrates a fully fledged corporate instant messaging platform inside the Zimbra WebClient, including Group and Corporate Messaging, File Sharing, Screen Sharing and informal Video Chat capabilities.
 
 Zextras Team includes the following front-end features:
 
@@ -89,3 +89,16 @@ Videoconferencing features are available in both Groups and Channels, allowing m
 This feature is based on the WebRTC protocol, a peer-to-peer auto-adaptive technology that allows clients to communicate directly without overloading the server and whose call quality is automatically tweaked based on the available bandwidth - with the maximum quality being Full HD for both video and audio. The first time a Videoconference is started, users will need to grant their browser access permissions to their camera and microphone.
 
 image::images/videoconference.png[Videoconferencing, 800]
+
+*Video Server*
+
+Video Server is a WebRTC stream aggregator that improves Connect'ss performance by merging and decoding/re-encoding all streams in a meeting. While the default WebRTC creates one incoming and one outgoing stream per meeting participant, with the Connect Video Server, each client will only have one aggregated inbound stream and one aggregated outbound stream. This applies for both video and audio.
+
+Consider a meetings with 5 people ...
+
+* Without Video Server: each client generates 4x outgoing video/audio streams and receives 4 incoming video/audio streams
+* With Video Server: each client generates 1 outgoing video/audio stream and receives 1 incoming video/audio stream
+
+The Video Server uses conservative Codecs (VP8 and Opus) to ensure the broadest compatibility, but more codecs can be enabled. It also splits the Webcam and Screen Sharing streams and reserves the same bandwidth for both.
+
+A properly set up Video Server will supersede the need of a TURN server, provided that all clients can reach the Video Server’s public IP and that UDP traffic is not filtered.

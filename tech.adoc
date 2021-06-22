@@ -1,7 +1,8 @@
 [[tech]]
 = Technical Overview
 
-Zimbra is an innovative messaging and collaboration application that offers the following state-of-the-art solutions that are accessed through the browser based web client.
+Zimbra is an innovative messaging and collaboration application that offers 
+the following state-of-the-art solutions that are accessed through the browser based web client.
 
 * Intuitive message management, search, tagging, and sharing.
 * Personal, external, and shared calendar.
@@ -10,7 +11,10 @@ Zimbra is an innovative messaging and collaboration application that offers the 
 
 == Zimbra Components
 
-Zimbra architecture includes open-source integrations using industry standard protocols. The third-party software listed in <<table_tps,Third-Party Software>> is bundled with Zimbra software and installed as part of the installation process. These components have been tested and configured to work with the software.
+Zimbra architecture includes open-source integrations using industry standard protocols. 
+The third-party software listed in <<table_tps,Third-Party Software>> is bundled with 
+Zimbra software and installed as part of the installation process. These components have 
+been tested and configured to work with the software.
 
 [[table_tps]]
 .Third-Party Software
@@ -46,7 +50,7 @@ Open source components that include:
 
 * ClamAV, an anti-virus scanner that protects against malicious files
 * SpamAssassin, a mail filter that attempts to identify spam
-* Amavisd-new interfaces between the MTA and one or more content checkers
+* Amavisd-new interfaces between the MTA and one or more content checkers 
 
 |Apache JSieve |
 Manages filters for email
