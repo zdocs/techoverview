@@ -1,12 +1,18 @@
 [colophon]
-= License
+[discrete]
 
-image:images/ccsa.png[CC BY-SA] Synacor, Inc., {copyright-year}
+Copyright (C) {copyright-year} Synacor, Inc. +
+All rights reserved.
 
-(C) {copyright-year} by Synacor, Inc. {product-name} {document-title}
+Confidential.
 
-Synacor, Inc., {copyright-year} +
+No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
+For permission requests, write to the publisher, addressed “Attention: Permissions Coordinator”, at the address below.
+
+Synacor, Inc. +
 40 La Riviere Drive, Suite 300 +
-Buffalo, New York 14202
+Buffalo, New York 14202 +
+https://www.synacor.com[www.synacor.com]
 
-https://www.synacor.com
+Revision: {revnumber} +
+{revdate}
