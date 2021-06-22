@@ -29,7 +29,7 @@ Web application server that runs Zimbra software.
 Open source mail transfer agent (MTA) that routes mail messages to the
 appropriate Zimbra server
 
-|Open LDAP software |
+|Open LDAP |
 Open source implementation of the Lightweight Directory Access Protocol
 (LDAP) that stores Zimbra system configuration, the Zimbra Global Address
 List, and provides user authentication. Zimbra can also work with GAL and
@@ -42,7 +42,7 @@ Database software
 |Lucene |
 Open source full-featured text and search engine
 
-| |
+|Misc. |
 Third-party source that converts certain attachment file types to HTML
 
 |Anti-virus/anti-spam |

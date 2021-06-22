@@ -2,6 +2,7 @@
 :description: Technical Overview
 :product: Zimbra
 :product-abbrev: ZCS
+:product-name: Zimbra Collaboration
 = {document-title}: {description}
 :toc: macro
 :toc-title: Table of Contents
