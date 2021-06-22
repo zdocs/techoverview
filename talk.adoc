@@ -1,41 +1,44 @@
 [appendix]
 [[TALK]]
-= Zimbra Talk V2
+= Zimbra Connect
 
-Zimbra Talk V2 is the newest addition to the Zimbra product line-up. Zimbra Talk V2 will be available in version 8.8.8 onwards.
-This is enterprise-level messaging and videoconferencing built inside the Zimbra web client. It includes one-on-one and group messaging and videoconferencing, along with full screen and file sharing capabilities.
+Zimbra Connect is chat and more, right in your Zimbra Web Client.  This is enterprise-level messaging and videoconferencing built inside the Zimbra web client. Zimbra Connect integrates a fully fledged corporate instant messaging platform inside the Zimbra WebClient, including Group and Corporate Messaging, File Sharing, Screen Sharing and informal Video Chat capabilities.
 
-Zimbra Talk V2 inherits some of the features from the previous Zimbra Chat, but the vast majority of the features are new. Some of the inherited features from Chat are (basic features):
+Zextras Team includes the following front-end features:
 
-* *1-to-1 text messaging*
-* *Buddy List Management*
-* *Chat history*
-* *Emojis*
-* *Status or presence management*
-* *User preferences*
+* Message delivery and read awareness
+* 1-to-1 Instant Messaging
+* Group Messaging
+* Corporate Messaging (Spaces and Channels)
+* Group Video Calls
+* Channel Video calls
+* File Sharing
+* Screen Sharing
+* Emojis
+* Mute conversations
 
-Zimbra Talk V2 provides advanced features. These features are:
+includes the following backend features:
 
-* *Message Delivery and Read Awareness.* Check marks show delivery or read status
-* *Group Messaging.* Secure and private messaging for small groups (up to 5 people)
-* *Videoconferencing.* WebRTC based video, out-of-the-box without any plug-in
-* *Corporate Communications.* Spaces and Channels for private or organization-wide communications
-* *File Sharing*
-* *Screen Sharing*
+* COS and User availability
+* Built-in TURN server compatibility
+* No core installation needed. Zimlet installation through a package manager.
+* No configuration needed
+* Peer-to-Peer WebRTC protocol to avoid server load
+* Dedicated audit log
 
-Beginning in Zimbra Collaboration Network Edition 8.8.8, the Zimbra Talk Zimlet will provide the basic chat features, these features will be available for all of your users. In order to enable the advanced chat and videoconferencing features per user, a purcharse of Zimbra Talk V2 license is needed.
+Beginning in Zimbra Collaboration Network Edition 8.8.8, the Zimbra Connect Zimlet will provide the basic 1:1 chat features only. In order to enable the advanced chat and videoconferencing features per user, a purcharse of Zimbra Connect license is needed.
 
-Zimbra Talk V2 has two user interfaces: *Chat Panel and Zimbra Talk tab*.
+Zimbra Connect has two user interfaces: *Chat Panel and Zimbra Connect tab*.
 
 The *Chat Panel* is available to all users - basic and advanced - for text messaging. Advanced users will have the additional options of videoconferencing and file sharing in the panel.
 
 image::images/panel_chat.png[Chat Panel, 600]
 
-The *Zimbra Talk* tab is only available for advanced Zimbra Talk users. This tab offers all of the corporate instant messaging features such as Spaces and Channels.
+The *Zimbra Connect* tab is only available for advanced Zimbra Connect users. This tab offers all of the corporate instant messaging features such as Spaces and Channels.
 
 image::images/talk_tab.png[Chat Panel, 600]
 
-Advanced Zimbra Talk users will have three options to interact with other users: Groups, Spaces, and Channel.
+Advanced Zimbra Connect users will have three options to interact with other users: Groups, Spaces, and Channel.
 
 *Groups*
 
